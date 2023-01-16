@@ -1,0 +1,22 @@
+uuid: 29ee6088-4c1c-4966-bbd3-07b8db4d3e1b
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - concentration_game
+  module:
+    - block_content
+    - link
+id: block_content.field_concentration_continu_link
+field_name: field_concentration_continu_link
+entity_type: block_content
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

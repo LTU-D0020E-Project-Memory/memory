@@ -1,0 +1,12 @@
+name: 'Concentration Game'
+type: module
+description: 'Module for Concentration Game'
+core_version_requirement: ^8 || ^9 || ^10
+package: 'Game'
+dependencies:
+  - media_library
+
+# Information added by Drupal.org packaging script on 2022-12-04
+version: '2.0.x-dev'
+project: 'concentration_game'
+datestamp: 1670171434

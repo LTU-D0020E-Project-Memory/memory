@@ -1,0 +1,28 @@
+uuid: b5c1297b-b0b9-4d8b-89d2-55a98efd4d36
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.concentration
+    - field.storage.block_content.field_concentration_face_down
+    - media.type.image
+id: block_content.concentration.field_concentration_face_down
+field_name: field_concentration_face_down
+entity_type: block_content
+bundle: concentration
+label: 'Face down image'
+description: 'Preferred format for image is <code>.png</code>.<br/ >Preferred size of image upload is less than 1 Mb. <br />Images should be <strong>100×125px</strong> (or larger).'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

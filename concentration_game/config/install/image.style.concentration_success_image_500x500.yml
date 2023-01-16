@@ -1,0 +1,18 @@
+uuid: 769f2e65-9d13-4a49-ae59-2ec1345dbae5
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - concentration_game
+name: concentration_success_image_500x500
+label: 'Concentration Success Image(500X500)'
+effects:
+  417c130a-0a76-41d2-8ede-df2e636c5026:
+    uuid: 417c130a-0a76-41d2-8ede-df2e636c5026
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 500
+      height: 500
+      anchor: center-center

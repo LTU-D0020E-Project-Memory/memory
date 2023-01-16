@@ -1,0 +1,23 @@
+uuid: b6f8d72a-5bc2-435a-91ff-279a65629283
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.concentration
+    - field.storage.block_content.field_concentration_continu_link
+  module:
+    - link
+id: block_content.concentration.field_concentration_continu_link
+field_name: field_concentration_continu_link
+entity_type: block_content
+bundle: concentration
+label: 'Continue Link'
+description: 'Use this field to add the URL and the link text of where to go <em>after</em> playing the game.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

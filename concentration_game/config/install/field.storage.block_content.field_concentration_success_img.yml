@@ -1,0 +1,23 @@
+uuid: ffb4d629-1551-420e-b7a6-8bae260f0217
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - concentration_game
+  module:
+    - block_content
+    - media
+id: block_content.field_concentration_success_img
+field_name: field_concentration_success_img
+entity_type: block_content
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

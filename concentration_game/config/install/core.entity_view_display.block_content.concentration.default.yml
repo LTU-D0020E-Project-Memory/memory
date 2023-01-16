@@ -1,0 +1,88 @@
+uuid: 8993f297-77da-440e-9709-973ee279b2c6
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - concentration_game
+  config:
+    - block_content.type.concentration
+    - field.field.block_content.concentration.field_concentration_continu_link
+    - field.field.block_content.concentration.field_concentration_face_down
+    - field.field.block_content.concentration.field_concentration_game_images
+    - field.field.block_content.concentration.field_concentration_instruction
+    - field.field.block_content.concentration.field_concentration_play_again
+    - field.field.block_content.concentration.field_concentration_success_img
+    - field.field.block_content.concentration.field_concentration_title
+    - image.style.concentration_image_100x125
+  module:
+    - link
+    - media
+id: block_content.concentration.default
+targetEntityType: block_content
+bundle: concentration
+mode: default
+content:
+  field_concentration_continu_link:
+    weight: 2
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_concentration_face_down:
+    type: entity_reference_entity_view
+    weight: 4
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_concentration_game_images:
+    type: media_thumbnail
+    weight: 3
+    label: above
+    settings:
+      image_style: concentration_image_100x125
+      image_link: ''
+    third_party_settings: {  }
+    region: content
+  field_concentration_instruction:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_concentration_play_again:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_concentration_success_img:
+    type: entity_reference_entity_view
+    weight: 1
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_concentration_title:
+    weight: 6
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

@@ -1,0 +1,22 @@
+uuid: 209027e6-329e-46a2-bbbe-8ba0dcc41304
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - concentration_game
+  module:
+    - block_content
+id: block_content.field_concentration_instruction
+field_name: field_concentration_instruction
+entity_type: block_content
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

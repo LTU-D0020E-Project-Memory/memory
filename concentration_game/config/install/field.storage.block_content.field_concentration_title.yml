@@ -1,0 +1,24 @@
+uuid: b39b372e-843d-49c4-b6ee-8f3cdf1e3a43
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - concentration_game
+  module:
+    - block_content
+id: block_content.field_concentration_title
+field_name: field_concentration_title
+entity_type: block_content
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

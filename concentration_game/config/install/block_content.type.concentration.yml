@@ -1,0 +1,11 @@
+uuid: c6744b40-bf6d-4caf-9209-63ae17037e69
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - concentration_game
+id: concentration
+label: Concentration
+revision: 0
+description: 'A custom block for The Concentration Game.'

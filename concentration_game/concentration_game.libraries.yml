@@ -1,0 +1,12 @@
+game_concentration:
+  js:
+    js/jquery.flipcard.js: {}
+    js/script.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings
+  
+  css:
+    state:
+      css/jquery.flipcard.css: {}

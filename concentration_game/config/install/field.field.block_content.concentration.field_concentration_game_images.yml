@@ -1,0 +1,28 @@
+uuid: e1d48d7d-7156-441d-ac45-77e75745fc9b
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.concentration
+    - field.storage.block_content.field_concentration_game_images
+    - media.type.image
+id: block_content.concentration.field_concentration_game_images
+field_name: field_concentration_game_images
+entity_type: block_content
+bundle: concentration
+label: 'Game Images'
+description: 'At least <strong>8</strong> images must be uploaded for the game to work.<br />Preferred format for images is <code>.png</code>.<br />Preferred size of image upload is less than 1 Mb.<br />Images should be <strong>100×125px</strong> (or larger).'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
