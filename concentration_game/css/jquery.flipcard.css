@@ -20,3 +20,21 @@
 .concentration_form .btn {display: inline-block; font-weight: 400; color: #212529; text-align: center; vertical-align: middle; cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-color: transparent;border: 2px solid transparent;padding: .375rem 1.25rem !important;font-size: 1.2rem;line-height: 1.5;border-radius: 1.25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;}
 .concentration_form .btn-blue { color: #fff; background-color: #009dd2; border-color: #009dd2;}
 @media (max-width: 767px) {.flipcard{ max-width:320px;}}
+
+.hint {
+    animation-name: hint;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes hint {
+    0% {
+        box-shadow: 0 0px 10px green;
+    }
+
+    100% {
+        box-shadow: 0px 0px 30px green;
+    }
+}
