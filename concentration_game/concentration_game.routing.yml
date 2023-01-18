@@ -1,0 +1,6 @@
+concentration_game.content:
+  path: 'memorysettings'
+  defaults:
+    _title: 'Memory Game'
+  requirements:
+    _permission: 'access content'
