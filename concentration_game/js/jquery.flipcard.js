@@ -45,21 +45,22 @@
         const _ = Memory;
         const $card = $( this );
         
-        if (
-            !_.getData( $card, "paused" ) &&
+        if (!_.getData( $card, "paused" ) &&
             !$card.find( ".inside" ).hasClass( "matched" ) &&
             !$card.find( ".inside" ).hasClass( "picked" )
-            ) {
-              $card.find( ".inside" ).addClass( "picked" );
+        )
+        
+        {
+          $card.find( ".inside" ).addClass( "picked" );
               
-              // if its clicked the first time, start guessing.
-              if ( !_.getData( $card, "guess" ) ) {
-                _.setData( $card, "guess", $( this ).attr( "data-id" ) );
-                if (_.hintCount >= 0) {
-                  //This saves the matching card of the currently picked one, for further use
-                  $hintCard = $(this).siblings().filter(function(i) {
-                    return $(this).attr("data-id") === _.getData( $card, "guess"); //Scan through all cards until true match is found
-                  });
+          // if its clicked the first time, start guessing.
+          if (!_.getData( $card, "guess" )) {
+            _.setData( $card, "guess", $( this ).attr( "data-id" ) );
+            if (_.hintCount >= 0) {
+              //This saves the matching card of the currently picked one, for further use
+              $hintCard = $(this).siblings().filter(function(i) {
+                return $(this).attr("data-id") === _.getData( $card, "guess"); //Scan through all cards until true match is found
+              });
 
               $hintCard.addClass("hint");
             }
@@ -164,7 +165,7 @@
 
     params = $.extend( {
       success: null,
-      limit: 8,
+      limit: 3,
       cards: []
     }, params );
 
