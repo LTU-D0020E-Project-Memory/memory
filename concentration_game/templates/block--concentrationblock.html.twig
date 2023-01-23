@@ -10,9 +10,11 @@
     {% if instruction %}
       <p class="text-center {{ uniqueID }}_ins">{{ instruction }}</p>
     {% endif %}
-    <div id="{{ uniqueID }}" class="game mt-3">
-      {# Game area  #}
+    <div id="{{ uniqueID }}" class="game mt-3 {{ gridSetup }}">
+     {# Grid classes #}
+
     </div>
+    
     <form action="{{ link.url}}" class="concentration_form">
       {% if playAgain %}
         <input disabled data-game="#{{ uniqueID }}" type="button" class="btn-disabled reset button btn btn-blue igbgame__button _{{ uniqueID }}_replay mt-3" value="{{ playAgain }}" />
