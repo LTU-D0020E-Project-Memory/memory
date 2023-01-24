@@ -7,27 +7,31 @@
 
 .flipcard {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
     gap: 5% 0;
     transform-style: preserve-3d;
     perspective: 500px;
 }
 
+.twobytwo {
+    grid-template-columns: 1fr 1fr;
+}
+
+.threebytwo {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.fourbyfour {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .card {
     aspect-ratio: 2/3;
-    max-width: 10vw;
+    width: 75%;
     perspective: 500px;
     position: relative;
     cursor: pointer;
     z-index: 50;
-}
-
-.card:nth-child(3n + 1) {
-    justify-self: end;
-}
-
-.card:nth-child(3n + 2) {
-    justify-self: center;
 }
 
 .card .inside {
@@ -156,15 +160,9 @@
     animation-timing-function: linear;
 }
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
+@media screen and (max-width: 1024px) {
     .card {
-        max-width: 20vw;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .card {
-        max-width: 25vw;
+        width: 85%;
     }
 }
 

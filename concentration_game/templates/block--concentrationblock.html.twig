@@ -11,8 +11,7 @@
       <p class="text-center {{ uniqueID }}_ins">{{ instruction }}</p>
     {% endif %}
     <div id="{{ uniqueID }}" class="game mt-3 {{ gridSetup }}">
-     {# Grid classes #}
-
+      {# Grid classes #}
     </div>
     
     <form action="{{ link.url}}" class="concentration_form">
@@ -27,4 +26,5 @@
     <p class="text-center">Insufficient cards to render concentration block,
        please provide at least 8 cards to render the block successfully.</p>
   {% endif %}
+  <script>var cardAmount = "{{gridSetup}}";</script>
 </div>

@@ -163,9 +163,28 @@
       }
     };
 
+    
+    let t = 3;
+    switch (cardAmount) {
+      case "twobytwo":
+        t = 2;
+        break;
+    
+      case "threebytwo":
+        t = 3;
+        break;
+
+      case "fourbyfour":
+        t = 8;
+        break;
+
+      default:
+        break;
+    }
+
     params = $.extend( {
       success: null,
-      limit: 3,
+      limit: t,
       cards: []
     }, params );
 
