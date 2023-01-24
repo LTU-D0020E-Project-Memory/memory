@@ -5,10 +5,15 @@
     padding-bottom: 20px;
 }
 
+.btn-wrap input {
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
 .flipcard {
     display: grid;
     justify-items: center;
-    gap: 5% 0;
+    gap: 5vh 0;
     transform-style: preserve-3d;
     perspective: 500px;
 }
@@ -97,11 +102,6 @@
 
 .break {
     clear: both;
-}
-
-.concentration_form {
-    text-align: center;
-    margin-top: 24px;
 }
 
 .concentration_form .btn-disabled {

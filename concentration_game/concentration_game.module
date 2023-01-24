@@ -102,7 +102,7 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
   $key = array_keys($variables['elements']['#attached']['drupalSettings']['gameBoxes']['concentration'])[0];
   $unique_id = $variables['elements']['#attached']['drupalSettings']['gameBoxes']['concentration'][$key]['uniqueID'];
   $variables['uniqueID'] = $unique_id;
-  $variables['gridSetup'] = 'fourbyfour';
+  $variables['gridSetup'] = 'threebytwo';
 }
 
 /**
