@@ -1,0 +1,25 @@
+uuid: 2ad4930e-9695-43a6-aeea-46adb1f8aa89
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.concentration
+    - field.storage.block_content.field_hints
+id: block_content.concentration.field_hints
+field_name: field_hints
+entity_type: block_content
+bundle: concentration
+label: Hints
+description: 'Choose number of failed tries before a hint is given. '
+required: false
+translatable: false
+default_value:
+  -
+    value: 5
+default_value_callback: ''
+settings:
+  min: 0
+  max: 10
+  prefix: ''
+  suffix: ''
+field_type: integer

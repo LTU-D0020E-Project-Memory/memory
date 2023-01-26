@@ -1,0 +1,23 @@
+uuid: b6ab2786-bf62-4205-8ec9-ac32123649b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.concentration
+    - field.storage.block_content.field_board_dimension
+  module:
+    - options
+id: block_content.concentration.field_board_dimension
+field_name: field_board_dimension
+entity_type: block_content
+bundle: concentration
+label: 'Board Dimension'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 4x4
+default_value_callback: ''
+settings: {  }
+field_type: list_string
