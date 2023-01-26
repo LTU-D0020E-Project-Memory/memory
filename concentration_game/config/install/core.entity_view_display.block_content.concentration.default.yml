@@ -2,11 +2,9 @@ uuid: 8993f297-77da-440e-9709-973ee279b2c6
 langcode: en
 status: true
 dependencies:
-  enforced:
-    module:
-      - concentration_game
   config:
     - block_content.type.concentration
+    - field.field.block_content.concentration.field_board_dimension
     - field.field.block_content.concentration.field_concentration_continu_link
     - field.field.block_content.concentration.field_concentration_face_down
     - field.field.block_content.concentration.field_concentration_game_images
@@ -14,17 +12,31 @@ dependencies:
     - field.field.block_content.concentration.field_concentration_play_again
     - field.field.block_content.concentration.field_concentration_success_img
     - field.field.block_content.concentration.field_concentration_title
+    - field.field.block_content.concentration.field_hints
     - image.style.concentration_image_100x125
   module:
     - link
     - media
+    - options
+  enforced:
+    module:
+      - concentration_game
+_core:
+  default_config_hash: i73OwbhYCJSPBsv9Dwp2UUFFdQWHoKxP4HcDZPv4SZI
 id: block_content.concentration.default
 targetEntityType: block_content
 bundle: concentration
 mode: default
 content:
+  field_board_dimension:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
   field_concentration_continu_link:
-    weight: 2
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -33,56 +45,67 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 8
     region: content
   field_concentration_face_down:
     type: entity_reference_entity_view
-    weight: 4
     label: above
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 6
     region: content
   field_concentration_game_images:
     type: media_thumbnail
-    weight: 3
     label: above
     settings:
-      image_style: concentration_image_100x125
       image_link: ''
+      image_style: concentration_image_100x125
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
+    weight: 5
     region: content
   field_concentration_instruction:
-    weight: 0
+    type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 1
     region: content
   field_concentration_play_again:
-    weight: 5
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 9
     region: content
   field_concentration_success_img:
     type: entity_reference_entity_view
-    weight: 1
     label: above
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 7
     region: content
   field_concentration_title:
-    weight: 6
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
+    region: content
+  field_hints:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden: {  }
