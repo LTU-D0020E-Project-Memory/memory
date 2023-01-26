@@ -25,34 +25,40 @@ function concentration_game_theme() {
  * {@inheritdoc}
  */
 function concentration_game_block_view_alter(array &$build, BlockPluginInterface $block) {
-  if (!empty($block->build()['#block_content']) && ($block->build()['#block_content']->bundle() === "concentration")) {
-    $facedown_image_mid = (!empty($block->build()['#block_content']->get('field_concentration_face_down')->getValue()))
-    ? $block->build()['#block_content']->get('field_concentration_face_down')->getValue()[0]['target_id'] : '';
-    $success_image_mid = (!empty($block->build()['#block_content']->get('field_concentration_success_img')->getValue()))
-    ? $block->build()['#block_content']->get('field_concentration_success_img')->getValue()[0]['target_id'] : '';
-    $facedown_image = get_image_data_concentration_game(
-      $facedown_image_mid,
-      'concentration_image_100x125'
-    );
-    $success_image = get_image_data_concentration_game(
-      $success_image_mid,
-      'concentration_success_image_500x500'
-    );
-    $images = $block->build()['#block_content']->get('field_concentration_game_images')->getValue();
+  $content = $block->build()['#block_content'];
+  if (!empty($content) && ($content->bundle() === "concentration")) {
+    if (empty($content->get('field_concentration_face_down')->getValue())) {
+      $facedown_image_mid = '';
+    }
+    
+    else {
+      $facedown_image_mid = $content->get('field_concentration_face_down')->getValue()[0]['target_id'];
+    }
+
+    if (empty($content->get('field_concentration_success_img')->getValue())) {
+      $success_image_mid = '';
+    }
+    
+    else {
+      $success_image_mid = $content->get('field_concentration_success_img')->getValue()[0]['target_id'];
+    }
+
+    $facedown_image = get_image_data_concentration_game($facedown_image_mid, 'concentration_image_100x125');
+    $success_image = get_image_data_concentration_game($success_image_mid, 'concentration_success_image_500x500');
+    $images = $content->get('field_concentration_game_images')->getValue();
     $image_info = [];
+    
     foreach ($images as $image) {
       $image_id = $image['target_id'];
-      $data = get_image_data_concentration_game(
-        $image_id,
-        'concentration_image_100x125'
-      );
+      $data = get_image_data_concentration_game($image_id, 'concentration_image_100x125');
       $image_info[] = [
         'id' => $image_id,
         'url' => $data['url'],
         'alt' => $data['alt'],
       ];
     }
-    $uniqueid = $block->build()['#block_content']->bundle() . '_' . $block->build()['#block_content']->id() . '_' . rand();
+
+    $uniqueid = $content->bundle().'_'.$content->id().'_'.rand();
     $build['#attached']['drupalSettings']['gameBoxes']['concentration'][$uniqueid] = [
       'cards' => $image_info,
       'facedown' => $facedown_image,
@@ -76,29 +82,49 @@ function concentration_game_theme_suggestions_block_alter(&$suggestions, &$vars)
  * {@inheritdoc}
  */
 function concentration_game_preprocess_block__concentrationblock(&$variables) {
-  $images = $variables['elements']['content']['#block_content']->get('field_concentration_game_images')->getValue();
-  $count = count($images);
-  $instruction = (!empty($variables['elements']['content']['#block_content']->get('field_concentration_instruction')->getValue()))
-  ? $variables['elements']['content']['#block_content']->get('field_concentration_instruction')->getValue()[0]['value'] : '';
-  $title = (!empty($variables['elements']['content']['#block_content']->get('field_concentration_title')->getValue()))
-  ? $variables['elements']['content']['#block_content']->get('field_concentration_title')->getValue()[0]['value'] : '';
-  $playAgain = (!empty($variables['elements']['content']['#block_content']->get('field_concentration_play_again')->getValue()))
-  ? $variables['elements']['content']['#block_content']->get('field_concentration_play_again')->getValue()[0]['value'] : '';
+  $content = $variables['elements']['content']['#block_content'];
+  $images = $content->get('field_concentration_game_images')->getValue();
+
+  if (!empty($content->get('field_concentration_instruction')->getValue())) {
+    $instruction = $content->get('field_concentration_instruction')->getValue()[0]['value'];
+  }
+  
+  else {
+    $instruction = '';
+  }
+
+  if (!empty($content->get('field_concentration_title')->getValue())) {
+    $title = $content->get('field_concentration_title')->getValue()[0]['value'];
+  }
+  
+  else {
+    $title = '';
+  }
+
+  if (!empty($content->get('field_concentration_play_again')->getValue())) {
+    $playAgain = $content->get('field_concentration_play_again')->getValue()[0]['value'];
+  }
+  
+  else {
+    $playAgain = '';
+  }
+
   $link = [];
-  if (!empty($variables['elements']['content']['#block_content']->get('field_concentration_continu_link')->getValue())) {
+  if (!empty($content->get('field_concentration_continu_link')->getValue())) {
     $link = [
-      'title' => $variables['elements']['content']['#block_content']->get('field_concentration_continu_link')->getValue()[0]['title'],
-      'url' => Url::fromUri($variables['elements']['content']['#block_content']->get('field_concentration_continu_link')->getValue()[0]['uri'])->toString(),
+      'title' => $content->get('field_concentration_continu_link')->getValue()[0]['title'],
+      'url' => Url::fromUri($content->get('field_concentration_continu_link')->getValue()[0]['uri'])->toString(),
     ];
   }
-  $uniqueid = $variables['elements']['content']['#block_content']->bundle() . '_' . $variables['elements']['content']['#block_content']->id();
-  $uniqueid = $uniqueid . "_" . rand();
+
+  $uniqueid = $content->bundle().'_'.$content->id();
+  $uniqueid = $uniqueid."_".rand();
   $variables['#attached']['library'][] = 'concentration_game/game_concentration';
   $variables['instruction'] = $instruction;
   $variables['title'] = $title;
   $variables['link'] = $link;
   $variables['playAgain'] = $playAgain;
-  $variables['do_render'] = ($count >= 8) ? TRUE : FALSE;
+  $variables['do_render'] = count($images) >= 8 ? TRUE : FALSE;
   $key = array_keys($variables['elements']['#attached']['drupalSettings']['gameBoxes']['concentration'])[0];
   $unique_id = $variables['elements']['#attached']['drupalSettings']['gameBoxes']['concentration'][$key]['uniqueID'];
   $variables['uniqueID'] = $unique_id;
@@ -121,17 +147,20 @@ function get_image_data_concentration_game($mid, $image_style = '') {
     'url' => NULL,
     'alt' => NULL,
   ];
+  
   if (!$mid) {
     return $data;
   }
+
   $media = Media::load($mid);
   $img = $media->get('thumbnail')->getValue()['0'];
+
   if (isset($img['target_id'])) {
     $file = File::load($img['target_id']);
     $url = $file->createFileUrl();
     if ($image_style) {
       $style = ImageStyle::load($image_style);
-      $url = ($style) ? $style->buildUrl($file->getFileUri()) : $url;
+      $url = $style ? $style->buildUrl($file->getFileUri()) : $url;
     }
 
     $data = [
@@ -139,5 +168,6 @@ function get_image_data_concentration_game($mid, $image_style = '') {
       'alt' => $img['alt'],
     ];
   }
+
   return $data;
 }
