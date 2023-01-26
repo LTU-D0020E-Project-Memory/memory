@@ -10,17 +10,23 @@
     {% if instruction %}
       <p class="text-center {{ uniqueID }}_ins">{{ instruction }}</p>
     {% endif %}
-    <div id="{{ uniqueID }}" class="game mt-3"></div>
-    <form action="{{ link.url}}" class="concentration_form">
-      {% if playAgain %}
-        <input disabled data-game="#{{ uniqueID }}" type="button" class="btn-disabled reset button btn btn-blue igbgame__button _{{ uniqueID }}_replay mt-3" value="{{ playAgain }}" />
-      {% endif %}
-      {% if link.url %}
-        <input type="submit" class="btn-disabled button btn btn-blue igbgame__button _{{ uniqueID }}_button mt-3" disabled value="{{ link.title}}" />
-      {% endif %}
-    </form>
+    <div id="{{ uniqueID }}" class="game mt-3 {{ gridSetup }}">
+      {# Grid classes #}
+    </div>
+    <div class="btn-wrap">
+        <form action="{{ link.url}}" class="concentration_form">
+        {% if playAgain %}
+          <input disabled data-game="#{{ uniqueID }}" type="button" class="btn-disabled reset button btn btn-blue igbgame__button _{{ uniqueID }}_replay mt-3" value="{{ playAgain }}" />
+        {% endif %}
+        <br />
+        {% if link.url %}
+          <input type="submit" class="btn-disabled button btn btn-blue igbgame__button _{{ uniqueID }}_button mt-3" disabled value="{{ link.title}}" />
+        {% endif %}
+      </form>
+    </div>
   {% else %}
     <p class="text-center">Insufficient cards to render concentration block,
        please provide at least 8 cards to render the block successfully.</p>
   {% endif %}
+  <script>var cardAmount = "{{gridSetup}}";</script>
 </div>
