@@ -148,8 +148,8 @@
         this.$cards.each( ( k, v ) => { // eslint-disable-line no-unused-vars
           frag += `<div class="card" data-id="${v.id}"><div class="inside">
           <div class="front"><img src="${v.url}" alt="${v.alt}" /></div>
-          <div class="back"><img src="${facedown.url}" alt="${facedown.alt}" /></div></div>
-          </div>`;
+          <div class="back"><img src="${facedown.url}" alt="${facedown.alt}" /></div>
+          </div></div>`;
         } );
 
         let overlay = "<div class=\"modal-overlay\">";

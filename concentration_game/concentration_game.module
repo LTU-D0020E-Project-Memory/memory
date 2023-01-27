@@ -72,8 +72,11 @@ function concentration_game_block_view_alter(array &$build, BlockPluginInterface
  * {@inheritdoc}
  */
 function concentration_game_theme_suggestions_block_alter(&$suggestions, &$vars) {
-  if (!empty($vars['elements']['content']) && !empty($vars['elements']['content']['#block_content'])
-    && ($vars['elements']['content']['#block_content']->bundle() === "concentration")) {
+  if (
+      !empty($vars['elements']['content']) 
+      && !empty($vars['elements']['content']['#block_content'])
+      && $vars['elements']['content']['#block_content']->bundle() === "concentration"
+    ) {
     $suggestions[] = 'block__concentrationblock';
   }
 }
@@ -128,13 +131,13 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
   $key = array_keys($variables['elements']['#attached']['drupalSettings']['gameBoxes']['concentration'])[0];
   $unique_id = $variables['elements']['#attached']['drupalSettings']['gameBoxes']['concentration'][$key]['uniqueID'];
   $variables['uniqueID'] = $unique_id;
-  $variables['gridSetup'] = 'threebytwo';
+  $variables['gridSetup'] = 'twobytwo';
 }
 
 /**
  * Callback to get image url.
  *
- * @param int $mid
+ * @param int $media_id
  *   Image media id.
  * @param string $image_style
  *   Image Style.
@@ -142,17 +145,17 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
  * @return array
  *   Array of url and alt text.
  */
-function get_image_data_concentration_game($mid, $image_style = '') {
+function get_image_data_concentration_game($media_id, $image_style = '') {
   $data = [
     'url' => NULL,
     'alt' => NULL,
   ];
-  
-  if (!$mid) {
+
+  if (!$media_id) {
     return $data;
   }
 
-  $media = Media::load($mid);
+  $media = Media::load($media_id);
   $img = $media->get('thumbnail')->getValue()['0'];
 
   if (isset($img['target_id'])) {
