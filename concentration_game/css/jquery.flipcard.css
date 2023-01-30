@@ -36,24 +36,22 @@
 }
 
 .card {
+    --egde-curve: 0.65rem;
+    position: relative;
     aspect-ratio: var(--aspect-ratio);
     width: 90%;
     max-width: calc(var(--card-height) * var(--aspect-ratio));
     max-height: var(--card-height);
+    border-radius: var(--egde-curve);
     perspective: 500px;
-    position: relative;
     cursor: pointer;
-    z-index: 50;
 }
 
 .card .inside {
     width: 100%;
     height: 100%;
-    display: block;
     transform-style: preserve-3d;
     transition: 0.4s ease-in-out;
-    background: white;
-    border-radius: .65rem;
 }
 
 .card .inside.picked,
@@ -66,7 +64,6 @@
 
 .card .inside.matched img {
     opacity: .6;
-    border-color: #3ec0e9;
 }
 
 .card .inside.matched .back img {
@@ -87,24 +84,20 @@
 
 .card .front,
 .card .back {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: .65rem;
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    border: 2px solid #555;
+    border-radius: var(--egde-curve);
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .card .front img,
 .card .back img {
     width: 100%;
-    display: block;
-    margin: 0 auto;
     height: 100%;
-    border: 2px solid #01719e;
-    border-radius: .65rem;
 }
 
 .break {
