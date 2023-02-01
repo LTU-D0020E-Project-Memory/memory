@@ -56,7 +56,7 @@
           // if its clicked the first time, start guessing.
           if (!_.getData( $card, "guess" )) {
             _.setData( $card, "guess", $( this ).attr( "data-id" ) );
-            if (_.hintCount >= 0) {
+            if (_.hintCount >= hintLimit) {
               //This saves the matching card of the currently picked one, for further use
               $hintCard = $(this).siblings().filter(function(i) {
                 return $(this).attr("data-id") === _.getData( $card, "guess"); //Scan through all cards until true match is found
@@ -76,9 +76,7 @@
           
           // its not a correct guess, reset both the cards and start guessing again.
           else {
-            console.log(_.hintCount);
             _.hintCount++;
-            console.log(_.hintCount);
             _.setData( $card, "guess", null );
             _.setData( $card, "paused", true );
             setTimeout( () => {
