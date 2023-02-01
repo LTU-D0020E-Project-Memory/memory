@@ -12,13 +12,13 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: 2x2
+      value: twobytwo
       label: 2x2
     -
-      value: 2x3
+      value: twobythree
       label: 2x3
     -
-      value: 4x4
+      value: fourbyfour
       label: 4x4
   allowed_values_function: ''
 module: options
