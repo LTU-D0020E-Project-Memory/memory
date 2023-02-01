@@ -104,6 +104,14 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
     $title = '';
   }
 
+    if (!empty($content->get('field_board_dimension')->getValue())) {
+    $dimension = $content->get('field_board_dimension')->getValue()[0]['value'];
+  }
+  
+  else {
+    $dimension = 'fourbyfour';
+  }
+
   if (!empty($content->get('field_concentration_play_again')->getValue())) {
     $playAgain = $content->get('field_concentration_play_again')->getValue()[0]['value'];
   }
@@ -131,7 +139,8 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
   $key = array_keys($variables['elements']['#attached']['drupalSettings']['gameBoxes']['concentration'])[0];
   $unique_id = $variables['elements']['#attached']['drupalSettings']['gameBoxes']['concentration'][$key]['uniqueID'];
   $variables['uniqueID'] = $unique_id;
-  $variables['gridSetup'] = 'twobytwo';
+  
+  $variables['gridSetup'] = $dimension;
 }
 
 /**
