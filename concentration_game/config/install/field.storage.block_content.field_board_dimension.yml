@@ -15,8 +15,8 @@ settings:
       value: twobytwo
       label: 2x2
     -
-      value: twobythree
-      label: 2x3
+      value: threebytwo
+      label: 3x2
     -
       value: fourbyfour
       label: 4x4
