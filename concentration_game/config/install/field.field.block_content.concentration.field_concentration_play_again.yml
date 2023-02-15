@@ -10,7 +10,7 @@ field_name: field_concentration_play_again
 entity_type: block_content
 bundle: concentration
 label: 'Play Again'
-description: ''
+description: 'Name of button to play game again'
 required: false
 translatable: false
 default_value: {  }
