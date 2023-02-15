@@ -1,0 +1,6 @@
+concentration_game.admin:
+  title: 'Memory module settings'
+  description: 'links to Memory settings page'
+  parent: system.admin_config_development
+  route_name: concentration_game.content
+  weight: 100

@@ -9,7 +9,7 @@ id: block_content.concentration.field_concentration_title
 field_name: field_concentration_title
 entity_type: block_content
 bundle: concentration
-label: 'Block Title'
+label: 'Block Title TEST'
 description: ''
 required: true
 translatable: false

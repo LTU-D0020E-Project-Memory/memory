@@ -1,22 +1,194 @@
-.wrap {position: relative;height: 100%;min-height: 500px;padding-bottom: 20px;}
-.flipcard {transform-style: preserve-3d;perspective: 500px;min-height: 100%;height: 100%;}
-.flipcard .card {width: 23%;max-width: 100px;height: 125px;padding: 4px;margin-bottom: 5px;text-align: center;perspective: 500px;position: relative;cursor: pointer;z-index: 50;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
-@media (max-width: 767px) { .flipcard .card {width: 22%; max-width: 80px;height: 100px;} .flipcard{ max-width:320px;}}
-.card .inside {width: 100%;height: 100%;display: block;transform-style: preserve-3d;transition: 0.4s ease-in-out;background: white;border-radius: .65rem;}
-.card .inside.picked, .card .inside.matched {transform: rotateY(180deg); -webkit-transform: rotateY(180deg); -moz-transform: rotateY(180deg); -o-transform: rotateY(180deg);}
-.card .inside.matched img {opacity: .6;border-color: #3ec0e9;}
-.card .inside.matched .back img {opacity: 0; -webkit-transition: opacity 1s ease-out; -moz-transition: opacity 1s ease-out; -o-transition: opacity 1s ease-out; transition: opacity 1s ease-out;}
-.card .front, .card .back {backface-visibility: hidden; -webkit-backface-visibility:hidden; border-radius: .65rem;position: absolute;top: 0;left:0;width: 100%;height: 100%;}
-.card .front img, .card .back img {width: 100%;display: block;margin: 0 auto;height: 100%;border: 2px solid #01719e;border-radius: .65rem;}
-.break {clear: both;}
-.card .front {transform: rotateY(-180deg);}
-.card .back {transform: rotateX(0);}
-.flipcard{width: 100%; justify-content: space-around; margin: 0 auto; max-width: 410px; display: flex; flex-wrap: wrap;}
-.concentration_form { text-align: center; margin-top: 24px;}
-.concentration_form .btn-disabled {background: #9fafb9!important;border-color: #9fafb9!important;cursor: no-drop!important;opacity: .75!important;}
-.concentration_form .btn-disabled:hover { color: #fff;}
-.concentrate { text-align: center;}
-.concentration_form .button {text-transform: uppercase; display: inline-flex; align-items: center; justify-content: space-between; font-size: 1rem;}
-.concentration_form .btn {display: inline-block; font-weight: 400; color: #212529; text-align: center; vertical-align: middle; cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-color: transparent;border: 2px solid transparent;padding: .375rem 1.25rem !important;font-size: 1.2rem;line-height: 1.5;border-radius: 1.25rem;transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;}
-.concentration_form .btn-blue { color: #fff; background-color: #009dd2; border-color: #009dd2;}
-@media (max-width: 767px) {.flipcard{ max-width:320px;}}
+:root {
+    --card-height: 20vh;
+    --aspect-ratio: 2/3;
+}
+
+.wrap {
+    position: relative;
+    height: 100%;
+    min-height: 500px;
+    padding-bottom: 20px;
+}
+
+.btn-wrap input {
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.flipcard {
+    display: grid;
+    justify-items: center;
+    gap: 2vh 0;
+    transform-style: preserve-3d;
+    perspective: 500px;
+}
+
+.twobytwo {
+    grid-template-columns: 1fr 1fr;
+}
+
+.threebytwo {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.fourbyfour {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card {
+    --egde-curve: 0.65rem;
+    position: relative;
+    aspect-ratio: var(--aspect-ratio);
+    width: 90%;
+    max-width: calc(var(--card-height) * var(--aspect-ratio));
+    max-height: var(--card-height);
+    border-radius: var(--egde-curve);
+    perspective: 500px;
+    cursor: pointer;
+}
+
+.card .inside {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: 0.4s ease-in-out;
+}
+
+.card .inside.picked,
+.card .inside.matched {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+}
+
+.card .inside.matched img {
+    opacity: .6;
+}
+
+.card .inside.matched .back img {
+    opacity: 0;
+    -webkit-transition: opacity 1s ease-out;
+    -moz-transition: opacity 1s ease-out;
+    -o-transition: opacity 1s ease-out;
+    transition: opacity 1s ease-out;
+}
+
+.card .front {
+    transform: rotateY(-180deg);
+}
+
+.card .back {
+    transform: rotateX(0);
+}
+
+.card .front,
+.card .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #555;
+    border-radius: var(--egde-curve);
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.card .front img,
+.card .back img {
+    width: 100%;
+    height: 100%;
+}
+
+.break {
+    clear: both;
+}
+
+.concentration_form .btn-disabled {
+    background: #9fafb9 !important;
+    border-color: #9fafb9 !important;
+    cursor: no-drop !important;
+    opacity: .75 !important;
+}
+
+.concentration_form .button {
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+.concentration_form .btn-disabled:hover {
+    color: #fff;
+}
+
+.concentration_form .btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 2px solid transparent;
+    padding: .375rem 1.25rem !important;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    border-radius: 1.25rem;
+}
+
+.concentration_form .btn-blue {
+    color: #fff;
+    background-color: #009dd2;
+    border-color: #009dd2;
+}
+
+.concentrate {
+    text-align: center;
+}
+
+.hint {
+    animation-name: hint;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@media (orientation: landscape) {
+    :root {
+        --card-height: 30vh;
+        --new-height: calc(var(--card-height) * (2/3)); /* Stupid? Yes. But needed to avoid making card-height undefined on fourbyfour */
+    }
+
+    .fourbyfour .card {
+        --card-height: var(--new-height);
+    }
+
+    .twobytwo {
+        gap: 2vh 2vh;
+    }
+    
+    .twobytwo .card:nth-child(2n + 0) {
+        justify-self: start;
+    }
+
+    .twobytwo .card:nth-child(2n + 1) {
+        justify-self: end;
+    }
+}
+
+@keyframes hint {
+    0% {
+        box-shadow: 0 0px 10px green;
+    }
+
+    100% {
+        box-shadow: 0px 0px 30px green;
+    }
+}

@@ -1,0 +1,30 @@
+uuid: 45630baf-13ed-45a5-8c23-87255dca2ff1
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_board_dimension
+field_name: field_board_dimension
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: twobytwo
+      label: 2x2
+    -
+      value: threebytwo
+      label: 3x2
+    -
+      value: fourbyfour
+      label: 4x4
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

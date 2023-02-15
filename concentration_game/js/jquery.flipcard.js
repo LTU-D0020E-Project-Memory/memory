@@ -6,6 +6,7 @@
   $.fn.flipcard = function( params ) {
     const Memory = {
       $game: null,
+      hintCount: 0,
       init( el, options ) {
         const shuffledCards = this.shuffle( options.cards );
         const slicedCards = shuffledCards.slice( 0, options.limit );
@@ -31,9 +32,11 @@
         el.on( "click", ".card", this.cardClicked );
         $(document).on( "click", ".reset", this.reset );
       },
+
       getData( el, key ) {
         return el.closest( ".flipcard" ).data( key );
       },
+
       setData( el, key, value ) {
         el.closest( ".flipcard" ).data( key, value );
       },
@@ -41,46 +44,67 @@
       cardClicked() {
         const _ = Memory;
         const $card = $( this );
-        if ( !_.getData( $card, "paused" ) &&
-          !$card.find( ".inside" ).hasClass( "matched" ) &&
-          !$card.find( ".inside" ).hasClass( "picked" ) ) {
+        
+        if (!_.getData( $card, "paused" ) &&
+            !$card.find( ".inside" ).hasClass( "matched" ) &&
+            !$card.find( ".inside" ).hasClass( "picked" )
+        )
+        
+        {
           $card.find( ".inside" ).addClass( "picked" );
-
+              
           // if its clicked the first time, start guessing.
-          if ( !_.getData( $card, "guess" ) ) {
+          if (!_.getData( $card, "guess" )) {
             _.setData( $card, "guess", $( this ).attr( "data-id" ) );
-          } else if ( _.getData( $card, "guess" ) === $( this ).attr( "data-id" ) &&
-            !$( this ).hasClass( "picked" ) ) { // if we are guessing and right card is clicked, set a match and start guessing next.
+            if (_.hintCount >= hintLimit) {
+              //This saves the matching card of the currently picked one, for further use
+              $hintCard = $(this).siblings().filter(function(i) {
+                return $(this).attr("data-id") === _.getData( $card, "guess"); //Scan through all cards until true match is found
+              });
+
+              $hintCard.addClass("hint");
+            }
+          } 
+          
+          // if we are guessing and right card is clicked, set a match and start guessing next.
+          else if ( _.getData( $card, "guess" ) === $( this ).attr( "data-id" ) && !$( this ).hasClass( "picked" ) ) {
             $card.closest( ".flipcard" ).find( ".picked" ).addClass( "matched" );
             _.setData( $card, "guess", null );
-          } else { // its not a correct guess, reset both the cards and start guessing again.
+            _.hintCount = 0;
+            $(".hint").removeClass("hint"); // Removes hint class
+          } 
+          
+          // its not a correct guess, reset both the cards and start guessing again.
+          else {
+            _.hintCount++;
             _.setData( $card, "guess", null );
             _.setData( $card, "paused", true );
             setTimeout( () => {
               $card.closest( ".flipcard" ).find( ".picked" ).removeClass( "picked" );
               _.setData( $card, "paused", false );
             }, 600 );
+            $(".hint").removeClass("hint");
           }
-
+          
           // flag success image when all cards are identified.
           if (
             $card
-              .closest( ".flipcard" )
-              .find( ".matched" )
-              .length === $card
-              .closest( ".flipcard" )
-              .find( ".card" )
-              .length ) {
-            _.win( _, $card );
-          }
+            .closest( ".flipcard" )
+            .find( ".matched" )
+            .length === $card
+            .closest( ".flipcard" )
+            .find( ".card" )
+            .length ) {
+              _.win( _, $card );
+            }
         }
       },
-
+      
       win( _, $card ) {
         const overlay = $card.closest( ".flipcard" ).find( ".modal-overlay" );
         const modal = $card.closest( ".flipcard" ).find( ".modal" );
         const blockId = $card.closest( ".flipcard" ).data( "options" ).id;
-
+        
         _.setData( $card, "paused", true );
         setTimeout( () => {
           $card.closest( ".flipcard" ).find( ".card" ).hide();
@@ -122,8 +146,8 @@
         this.$cards.each( ( k, v ) => { // eslint-disable-line no-unused-vars
           frag += `<div class="card" data-id="${v.id}"><div class="inside">
           <div class="front"><img src="${v.url}" alt="${v.alt}" /></div>
-          <div class="back"><img src="${facedown.url}" alt="${facedown.alt}" /></div></div>
-          </div>`;
+          <div class="back"><img src="${facedown.url}" alt="${facedown.alt}" /></div>
+          </div></div>`;
         } );
 
         let overlay = "<div class=\"modal-overlay\">";
@@ -137,9 +161,28 @@
       }
     };
 
+    
+    let t = 3;
+    switch (cardAmount) {
+      case "twobytwo":
+        t = 2;
+        break;
+    
+      case "threebytwo":
+        t = 3;
+        break;
+
+      case "fourbyfour":
+        t = 8;
+        break;
+
+      default:
+        break;
+    }
+
     params = $.extend( {
       success: null,
-      limit: 8,
+      limit: t,
       cards: []
     }, params );
 
