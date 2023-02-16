@@ -24,6 +24,26 @@
         {% endif %}
       </form>
     </div>
+
+    <style>
+      table, th, td {
+        border: 1px solid;
+      }
+    </style>
+    <table id="stats" class="statstable"> {# Trial table #}
+      <tr>
+        <th>Amount of guesses</th>
+        <th>Time taken</th>
+      </tr>
+      <tr>
+      {# Data goes here #}
+        <td id="guesses">N/A</td>
+        <td id="time">N/A</td>
+      </tr>
+    </table>
+
+    
+
   {% else %}
     <p class="text-center">Insufficient cards to render concentration block,
        please provide at least 8 cards to render the block successfully.</p>
