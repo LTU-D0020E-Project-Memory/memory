@@ -30,7 +30,7 @@
       setup( el ) {
         el.html( this.buildHTML() );
         var stats = document.getElementById("stats");
-        stats.style.display = "none";
+        stats.style.visibility = "hidden";
       },
 
       binding( el ) {
@@ -120,9 +120,9 @@
         _.setData( $card, "paused", true );
         document.getElementById("guesses").innerHTML = _.guesses;
         document.getElementById("time").innerHTML = _.stopTime;
-        modal.removeClass('hidden').show();
+       // modal.removeClass('hidden').show();
         var stats = document.getElementById("stats");
-        stats.style.display = "block";
+        stats.style.visibility = "visible"
         _.guesses = 0;
         _.startTime = 0;
         setTimeout( () => {
