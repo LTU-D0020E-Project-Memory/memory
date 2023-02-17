@@ -154,6 +154,11 @@
     text-align: center;
 }
 
+.statstable {
+    position: relative;
+    left: 37%;
+}
+
 .hint {
     animation-name: hint;
     animation-duration: 1s;
