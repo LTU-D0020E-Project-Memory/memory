@@ -1,0 +1,23 @@
+uuid: 4af9ab75-3468-4233-a1f6-06e453f99294
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.concentration
+    - field.storage.block_content.field_hint_color
+  module:
+    - options
+id: block_content.concentration.field_hint_color
+field_name: field_hint_color
+entity_type: block_content
+bundle: concentration
+label: 'Hint color'
+description: 'This color will be used as the background for the hint animation'
+required: true
+translatable: false
+default_value:
+  -
+    value: darkgreen
+default_value_callback: ''
+settings: {  }
+field_type: list_string

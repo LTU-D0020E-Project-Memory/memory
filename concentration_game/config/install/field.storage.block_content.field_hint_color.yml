@@ -1,0 +1,30 @@
+uuid: 656adcbf-ca90-4a18-95e3-9b4a8bd469d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_hint_color
+field_name: field_hint_color
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: darkgreen
+      label: Green
+    -
+      value: '#204ab2'
+      label: Blue
+    -
+      value: magenta
+      label: Purple
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

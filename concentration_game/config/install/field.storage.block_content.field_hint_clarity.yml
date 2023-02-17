@@ -1,0 +1,27 @@
+uuid: 0ee576d2-8c8e-440d-a1d8-4af82100e4f4
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_hint_clarity
+field_name: field_hint_clarity
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 0px
+      label: Standard
+    -
+      value: 5px
+      label: Enhanced
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

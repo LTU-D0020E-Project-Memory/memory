@@ -7,6 +7,9 @@
     const Memory = {
       $game: null,
       hintCount: 0,
+      guesses: 0,
+      startTime: 0,
+      stopTime: 0,
       init( el, options ) {
         const shuffledCards = this.shuffle( options.cards );
         const slicedCards = shuffledCards.slice( 0, options.limit );
@@ -26,6 +29,8 @@
 
       setup( el ) {
         el.html( this.buildHTML() );
+        var stats = document.getElementById("stats");
+        stats.style.visibility = "hidden";
       },
 
       binding( el ) {
@@ -56,6 +61,10 @@
           // if its clicked the first time, start guessing.
           if (!_.getData( $card, "guess" )) {
             _.setData( $card, "guess", $( this ).attr( "data-id" ) );
+            _.guesses ++;
+            if (_.startTime == 0) {
+              _.startTime = Date.now();
+            }
             if (_.hintCount >= hintLimit) {
               //This saves the matching card of the currently picked one, for further use
               $hintCard = $(this).siblings().filter(function(i) {
@@ -105,13 +114,20 @@
         const modal = $card.closest( ".flipcard" ).find( ".modal" );
         const blockId = $card.closest( ".flipcard" ).data( "options" ).id;
         
+        $card.closest( ".flipcard" ).find( ".card" ).hide();
+        overlay.show();
+        _.stopTime = (Date.now() - _.startTime)/1000;
         _.setData( $card, "paused", true );
+        document.getElementById("guesses").innerHTML = _.guesses;
+        document.getElementById("time").innerHTML = _.stopTime;
+       // modal.removeClass('hidden').show();
+        var stats = document.getElementById("stats");
+        stats.style.visibility = "visible"
+        _.guesses = 0;
+        _.startTime = 0;
         setTimeout( () => {
-          $card.closest( ".flipcard" ).find( ".card" ).hide();
-          overlay.show();
-          modal.removeClass('hidden').show();
-          $( `[data-game="#${blockId}"]` ).prop( "disabled", false ).removeClass("btn-disabled");
-          $( `._${blockId}_button` ).prop( "disabled", false ).removeClass( "btn-disabled" );
+        $( `[data-game="#${blockId}"]` ).prop( "disabled", false ).removeClass("btn-disabled");
+        $( `._${blockId}_button` ).prop( "disabled", false ).removeClass( "btn-disabled" );
         }, 1000 );
       },
 
@@ -160,9 +176,7 @@
         return frag;
       }
     };
-
     
-    let t = 3;
     switch (cardAmount) {
       case "twobytwo":
         t = 2;
@@ -177,6 +191,7 @@
         break;
 
       default:
+        t = 3
         break;
     }
 

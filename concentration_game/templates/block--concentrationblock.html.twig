@@ -13,6 +13,24 @@
     <div id="{{ uniqueID }}" class="game mt-3 {{ gridSetup }}">
       {# Grid classes #}
     </div>
+    
+    <style>
+      table, th, td {
+         border: 1px solid;
+      }
+    </style>
+    <table id="stats" class="statstable"> {# Trial table #}
+      <tr>
+        <th>Amount of guesses</th>
+        <th>Time taken</th>
+      </tr>
+      <tr>
+      {# Data goes here #}
+        <td id="guesses">N/A</td>
+        <td id="time">N/A</td>
+      </tr>
+    </table>
+
     <div class="btn-wrap">
         <form action="{{ link.url}}" class="concentration_form">
         {% if playAgain %}
@@ -25,11 +43,15 @@
       </form>
     </div>
   {% else %}
-    <p class="text-center">Insufficient cards to render concentration block,
-       please provide at least 8 cards to render the block successfully.</p>
+    <p class="text-center">Insufficient cards to render concentration block, please add more cards.</p>
   {% endif %}
-  <script>var cardAmount = "{{gridSetup}}";
-  var hintLimit = "{{hints}}";
+  <script>
+    var cardAmount = "{{gridSetup}}";
+    var hintLimit = "{{hintLimit}}";
+
+    let root = document.documentElement;
+    root.style.setProperty('--hint-color', "{{hintColor}}");
+    root.style.setProperty('--hint-clarity', "{{hintClarity}}");
   </script>
 
 </div>
