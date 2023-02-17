@@ -159,10 +159,11 @@
         let frag = "";
         const { facedown } = this;
         const { success } = this;
+        
         this.$cards.each( ( k, v ) => { // eslint-disable-line no-unused-vars
           frag += `<div class="card" data-id="${v.id}"><div class="inside">
-          <div class="front"><img src="${v.url}" alt="${v.alt}" /></div>
-          <div class="back"><img src="${facedown.url}" alt="${facedown.alt}" /></div>
+          <div class="front" title="${v.alt}" style="background-image: url(${v.url})"></div>
+          <div class="back" title="${facedown.alt}" style="background-image: url(${facedown.url})"></div>
           </div></div>`;
         } );
 
