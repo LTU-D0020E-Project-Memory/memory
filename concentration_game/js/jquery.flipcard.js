@@ -160,9 +160,7 @@
         return frag;
       }
     };
-
     
-    let t = 3;
     switch (cardAmount) {
       case "twobytwo":
         t = 2;
@@ -177,6 +175,7 @@
         break;
 
       default:
+        t = 3
         break;
     }
 

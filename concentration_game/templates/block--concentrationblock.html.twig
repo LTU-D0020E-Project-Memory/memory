@@ -25,11 +25,15 @@
       </form>
     </div>
   {% else %}
-    <p class="text-center">Insufficient cards to render concentration block,
-       please provide at least 8 cards to render the block successfully.</p>
+    <p class="text-center">Insufficient cards to render concentration block, please add more cards.</p>
   {% endif %}
-  <script>var cardAmount = "{{gridSetup}}";
-  var hintLimit = "{{hints}}";
+  <script>
+    var cardAmount = "{{gridSetup}}";
+    var hintLimit = "{{hintLimit}}";
+
+    let root = document.documentElement;
+    root.style.setProperty('--hint-color', "{{hintColor}}");
+    root.style.setProperty('--hint-clarity', "{{hintClarity}}");
   </script>
 
 </div>

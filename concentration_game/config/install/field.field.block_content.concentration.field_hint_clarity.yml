@@ -1,0 +1,23 @@
+uuid: a6825dc6-bc6b-4a24-b5de-0dcae568e8bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.concentration
+    - field.storage.block_content.field_hint_clarity
+  module:
+    - options
+id: block_content.concentration.field_hint_clarity
+field_name: field_hint_clarity
+entity_type: block_content
+bundle: concentration
+label: 'Hint clarity'
+description: 'Sets the intensity of the hint animation'
+required: true
+translatable: false
+default_value:
+  -
+    value: 0px
+default_value_callback: ''
+settings: {  }
+field_type: list_string

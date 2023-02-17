@@ -12,6 +12,8 @@ dependencies:
     - field.field.block_content.concentration.field_concentration_play_again
     - field.field.block_content.concentration.field_concentration_success_img
     - field.field.block_content.concentration.field_concentration_title
+    - field.field.block_content.concentration.field_hint_clarity
+    - field.field.block_content.concentration.field_hint_color
     - field.field.block_content.concentration.field_hints
     - image.style.concentration_image_100x125
   module:
@@ -22,7 +24,7 @@ dependencies:
     module:
       - concentration_game
 _core:
-  default_config_hash: i73OwbhYCJSPBsv9Dwp2UUFFdQWHoKxP4HcDZPv4SZI
+  default_config_hash: bXj4nwKIJwillcP1WZfVYSVi0bEuBimJ-lWKxqxsrOI
 id: block_content.concentration.default
 targetEntityType: block_content
 bundle: concentration
@@ -98,6 +100,20 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_hint_clarity:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_hint_color:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
     region: content
   field_hints:
     type: number_integer
