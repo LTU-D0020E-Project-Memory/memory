@@ -2,8 +2,9 @@ uuid: 656adcbf-ca90-4a18-95e3-9b4a8bd469d4
 langcode: en
 status: true
 dependencies:
+  enforced:
   module:
-    - block_content
+    - concentration_game
     - options
 id: block_content.field_hint_color
 field_name: field_hint_color
