@@ -10,7 +10,6 @@ dependencies:
     - field.field.block_content.concentration.field_concentration_game_images
     - field.field.block_content.concentration.field_concentration_instruction
     - field.field.block_content.concentration.field_concentration_play_again
-    - field.field.block_content.concentration.field_concentration_success_img
     - field.field.block_content.concentration.field_concentration_title
     - field.field.block_content.concentration.field_hint_clarity
     - field.field.block_content.concentration.field_hint_color
@@ -83,15 +82,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 9
-    region: content
-  field_concentration_success_img:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 7
     region: content
   field_concentration_title:
     type: string
