@@ -11,7 +11,7 @@ field_name: field_concentration_face_down
 entity_type: block_content
 bundle: concentration
 label: 'Face down image'
-description: 'Preferred format for image is <code>.png</code>.<br/ >Preferred size of image upload is less than 1 Mb. <br />Images should be <strong>100×125px</strong> (or larger).'
+description: 'Preferred image ratio is 2:3 and the preferred file size is less than 1 Mb.'
 required: true
 translatable: false
 default_value: {  }

@@ -43,14 +43,14 @@ function concentration_game_block_view_alter(array &$build, BlockPluginInterface
       $success_image_mid = $content->get('field_concentration_success_img')->getValue()[0]['target_id'];
     }
 
-    $facedown_image = get_image_data_concentration_game($facedown_image_mid, 'concentration_image_100x125');
+    $facedown_image = get_image_data_concentration_game($facedown_image_mid, 'concentration_image_200x300');
     $success_image = get_image_data_concentration_game($success_image_mid, 'concentration_success_image_500x500');
     $images = $content->get('field_concentration_game_images')->getValue();
     $image_info = [];
     
     foreach ($images as $image) {
       $image_id = $image['target_id'];
-      $data = get_image_data_concentration_game($image_id, 'concentration_image_100x125');
+      $data = get_image_data_concentration_game($image_id, 'concentration_image_200x300');
       $image_info[] = [
         'id' => $image_id,
         'url' => $data['url'],

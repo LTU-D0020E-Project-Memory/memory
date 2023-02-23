@@ -15,7 +15,7 @@ dependencies:
     - field.field.block_content.concentration.field_hint_clarity
     - field.field.block_content.concentration.field_hint_color
     - field.field.block_content.concentration.field_hints
-    - image.style.concentration_image_100x125
+    - image.style.concentration_image_200x300
   module:
     - link
     - media
@@ -63,7 +63,7 @@ content:
     label: above
     settings:
       image_link: ''
-      image_style: concentration_image_100x125
+      image_style: concentration_image_200x300
       image_loading:
         attribute: lazy
     third_party_settings: {  }
