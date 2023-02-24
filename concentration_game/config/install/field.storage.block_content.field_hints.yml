@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   enforced:
-  module:
+   module:
     - concentration_game
+  module:
+   - block_content
 id: block_content.field_hints
 field_name: field_hints
 entity_type: block_content
