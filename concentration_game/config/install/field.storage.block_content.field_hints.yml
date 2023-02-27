@@ -2,8 +2,11 @@ uuid: d8657410-3668-498d-98d9-788f1afd53f4
 langcode: en
 status: true
 dependencies:
+  enforced:
+   module:
+    - concentration_game
   module:
-    - block_content
+   - block_content
 id: block_content.field_hints
 field_name: field_hints
 entity_type: block_content

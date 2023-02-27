@@ -10,7 +10,6 @@
         $( ".concentrate .game" ).each(function() {
           $( `#${uniqueid}` ).flipcard( {
             cards: data.cards,
-            success: data.success_image,
             facedown: data.facedown,
             id: uniqueid
           } );

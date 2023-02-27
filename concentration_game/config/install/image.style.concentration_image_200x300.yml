@@ -1,0 +1,20 @@
+uuid: a1b4fd0a-f0bb-4711-8acb-c878fe21c0dc
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - concentration_game
+_core:
+  default_config_hash: UVKxEApYB1bvC2c2HCoQo8pXfyobYta7QE9gzUxHJm8
+name: concentration_image_200x300
+label: 'Concentration Image(200x300)'
+effects:
+  34280bf1-c999-46c5-99e0-5d86a7932097:
+    uuid: 34280bf1-c999-46c5-99e0-5d86a7932097
+    id: image_scale
+    weight: 2
+    data:
+      width: null
+      height: 300
+      upscale: true

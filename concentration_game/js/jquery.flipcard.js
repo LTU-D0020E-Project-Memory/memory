@@ -16,7 +16,6 @@
 
         this.blockid = options.id;
         this.facedown = options.facedown;
-        this.success = options.success;
         this.cardsArray = $.merge( slicedCards, slicedCards );
         this.shuffleCards( );
         this.setup( el );
@@ -158,17 +157,16 @@
       buildHTML() {
         let frag = "";
         const { facedown } = this;
-        const { success } = this;
+        
         this.$cards.each( ( k, v ) => { // eslint-disable-line no-unused-vars
           frag += `<div class="card" data-id="${v.id}"><div class="inside">
-          <div class="front"><img src="${v.url}" alt="${v.alt}" /></div>
-          <div class="back"><img src="${facedown.url}" alt="${facedown.alt}" /></div>
+          <div class="front" title="${v.alt}" style="background-image: url(${v.url})"></div>
+          <div class="back" title="${facedown.alt}" style="background-image: url(${facedown.url})"></div>
           </div></div>`;
         } );
 
         let overlay = "<div class=\"modal-overlay\">";
         overlay += "<div class=\"modal hidden\">";
-        overlay += `<div class="success"><img src="${success.url}" alt="${success.alt}" /></div>`;
 
         // overlay += '<button class="reset">Play Again?</button>';
         overlay += "</div>";
