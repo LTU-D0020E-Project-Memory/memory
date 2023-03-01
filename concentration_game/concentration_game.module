@@ -38,17 +38,44 @@ function concentration_game_block_view_alter(array &$build, BlockPluginInterface
     $facedown_image = get_image_data_concentration_game($facedown_image_mid, 'concentration_image_200x300');
     $images = $content->get('field_concentration_game_images')->getValue();
     $image_info = [];
-    
+    $user_id = \Drupal::currentUser()->id();
+
     foreach ($images as $image) {
       $image_id = $image['target_id'];
+      $data = get_image_data_concentration_game($image_id, 'concentration_image_100x125');
+      if($user_id == $data['owner_id']){
       $data = get_image_data_concentration_game($image_id, 'concentration_image_200x300');
       $image_info[] = [
         'id' => $image_id,
         'url' => $data['url'],
         'alt' => $data['alt'],
+        'owner_id' => $data['owner_id'],
       ];
     }
+    }
+    $cardAmount = 8;
+    if (count($image_info) < $cardAmount) {
+      $admin_user = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => 'admin']);
+      $admin_user_id = !empty($admin_user) ? reset($admin_user)->id() : 0;
+    while(count($image_info)< $cardAmount){
+      foreach ($images as $image) {
+        if (count($image_info) >= $cardAmount) {
+          break 2; 
+        }
+        $image_id = $image['target_id'];
+        $data = get_image_data_concentration_game($image_id, 'concentration_image_100x125');
+        if($admin_user_id == $data['owner_id']){
+        $image_info[] = [
+          'id' => $image_id,
+          'url' => $data['url'],
+          'alt' => $data['alt'],
+          'owner_id' => $data['owner_id'],
+        ];
+      }
+      }
+    }
 
+    }
     $uniqueid = $content->bundle().'_'.$content->id().'_'.rand();
     $build['#attached']['drupalSettings']['gameBoxes']['concentration'][$uniqueid] = [
       'cards' => $image_info,
@@ -75,6 +102,7 @@ function concentration_game_theme_suggestions_block_alter(&$suggestions, &$vars)
  * {@inheritdoc}
  */
 function concentration_game_preprocess_block__concentrationblock(&$variables) {
+  //global $cardAmount;
   $content = $variables['elements']['content']['#block_content'];
   $images = $content->get('field_concentration_game_images')->getValue();
 
@@ -110,22 +138,23 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
     $hints = 0;
   }
   
-  if (!empty($content->get('field_hint_clarity')->getValue())) {
+ if (!empty($content->get('field_hint_clarity')->getValue())) {
     $hintClarity = strval($content->get('field_hint_clarity')->getValue()[0]['value']);
   }
   
-  else {
+ else {
     $hintClarity = "0px";
   }
   
-  if (!empty($content->get('field_hint_color')->getValue())) {
+ if (!empty($content->get('field_hint_color')->getValue())) {
     $hintColor = strval($content->get('field_hint_color')->getValue()[0]['value']);
   }
   
   else {
     $hintColor = "darkgreen";
   }
-
+  $hintColor = "darkgreen";
+  $hintClarity = "0px";
   if (!empty($content->get('field_concentration_play_again')->getValue())) {
     $playAgain = $content->get('field_concentration_play_again')->getValue()[0]['value'];
   }
@@ -133,6 +162,7 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
   else {
     $playAgain = '';
   }
+
 
   $link = [];
   if (!empty($content->get('field_concentration_continu_link')->getValue())) {
@@ -174,6 +204,7 @@ function get_image_data_concentration_game($media_id, $image_style = '') {
   $data = [
     'url' => NULL,
     'alt' => NULL,
+    'owner_id' => NULL,
   ];
 
   if (!$media_id) {
@@ -194,6 +225,7 @@ function get_image_data_concentration_game($media_id, $image_style = '') {
     $data = [
       'url' => $url,
       'alt' => $img['alt'],
+      'owner_id' => $file->getOwnerId(),
     ];
   }
 
