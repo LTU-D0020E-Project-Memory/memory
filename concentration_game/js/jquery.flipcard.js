@@ -30,7 +30,7 @@
       setup( el ) {
         el.html( this.buildHTML() );
         var stats = document.getElementById("stats");
-        stats.style.visibility = "hidden";
+        // stats.style.visibility = "hidden";
       },
 
       binding( el ) {
@@ -119,8 +119,6 @@
         overlay.show();
         _.stopTime = (Date.now() - _.startTime)/1000;
         _.setData( $card, "paused", true );
-       //document.getElementById("guesses").innerHTML = _.guesses;
-       // document.getElementById("time").innerHTML = _.stopTime;
        
        // Start save sats
        if (localStorage.getItem('game_stats') === null) {
@@ -130,38 +128,16 @@
         let game_stats = localStorage.getItem('game_stats') + _.stopTime + "|" + _.guesses + "|" + _.hintStat + ";";
         localStorage.setItem('game_stats', game_stats);
         // End save stats
-        this.preparearray();
+
         var stats = document.getElementById("stats");
         stats.style.visibility = "visible"
         _.guesses = 0;
         _.startTime = 0;
+
         setTimeout( () => {
         $( `[data-game="#${blockId}"]` ).prop( "disabled", false ).removeClass("btn-disabled");
         $( `._${blockId}_button` ).prop( "disabled", false ).removeClass( "btn-disabled" );
         }, 1000 );
-      },
-      
-      preparearray(){
-        let fetcharray = localStorage.getItem('game_stats');
-        console.log (fetcharray);
-        let superArray = fetcharray.split(";");
-        let i = 0;
-        while (i<superArray.length){
-          superArray[i] = superArray[i].split("|");
-          i++;
-        }
-        this.populatetable(superArray);
-      },
-
-      populatetable(inArray){
-        var table = document.getElementById("stats");
-        for(let i = 0 ; i < (inArray.length - 1) ; i++){
-          var row = table.insertRow();
-          for(let z = 0 ; z < 3 ; z++){
-            var td = row.insertCell();
-            td.textContent = inArray[i][z];
-          }
-        }
       },
 
       reset() {
@@ -201,7 +177,6 @@
 
         let overlay = "<div class=\"modal-overlay\">";
         overlay += "<div class=\"modal hidden\">";
-
         overlay += '<button class="reset">Play Again?</button>';
         overlay += "</div>";
         frag += overlay;

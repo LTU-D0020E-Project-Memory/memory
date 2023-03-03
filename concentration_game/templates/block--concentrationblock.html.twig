@@ -34,25 +34,6 @@
         background-color: #f2f2f2;
     }
     </style>
-    <div>
-      <canvas id="chartTime"></canvas>
-    </div>
-    <div>
-      <canvas id="chartComb"></canvas>
-    </div>
-    <table id="stats" class="statstable"> {# Trial table #}
-      <tr>
-        <th>Amount of guesses</th>
-        <th>Time taken</th>
-      </tr>
-      <tr>
-      {# Data goes here #}
-        <td id="guesses">N/A</td>
-        <td id="time">N/A</td>
-      </tr>
-    </table>
-
-
 
     <div class="btn-wrap">
       <form action="{{ link.url }}" class="concentration_form">
@@ -68,6 +49,25 @@
   {% else %}
     <p class="text-center">Insufficient cards to render concentration block, please add more cards.</p>
   {% endif %}
+  <br>
+  <table id="stats" class="statstable">
+    <tr>
+      <th>Time taken</th>
+      <th>Amount of guesses</th>
+      <th>Amount of hints</th>
+    </tr>
+    <tr>
+      {# Data goes here #}
+    </tr>
+  </table>
+
+  <div>
+    <canvas id="chartTime"></canvas>
+  </div>
+  <div>
+    <canvas id="chartComb"></canvas>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     var cardAmount = "{{gridSetup}}";
@@ -77,28 +77,50 @@
     root.style.setProperty('--hint-color', "{{hintColor}}");
     root.style.setProperty('--hint-clarity', "{{hintClarity}}");
   </script>
-  <br>
-    <table id="stats" class="statstable"> {# Trial table #}
-      <tr>
-        <th>Time taken</th>
-        <th>Amount of guesses</th>
-        <th>Amount of hints</th>
-      </tr>
-      <tr>
-      {# Data goes here #}
-      </tr>
-    </table>
 
   <script>
-    // const data = f();
+    function prepareArray() {
+      let arr = localStorage.getItem('game_stats');
+      let superArray = arr.split(";");
+      superArray.pop();
+
+      let i = 0;
+      let labels = [];
+      while (i < superArray.length) {
+        superArray[i] = superArray[i].split("|");
+        labels.push(String(i));
+        i++;
+      }
+      
+      return [superArray, labels];
+    }
+
+    function populateTable(inArray) {
+      var table = document.getElementById("stats");
+      for(let i = 0; i < (inArray.length); i++) {
+        var row = table.insertRow();
+        for(let z = 0; z < 3; z++) {
+          var td = row.insertCell();
+          td.textContent = inArray[i][z];
+        }
+      }
+    }
+
+    const data = prepareArray();
+    populateTable(data[0]);
+    const timesSeries = []
+    data[0].forEach((game) => {
+      timesSeries.push(game[0]);
+    });
+
     const graphTime = document.getElementById('chartTime');
     new Chart(graphTime, {
       type: 'line',
       data: {
-        labels: ['0', '1', '2', '3', '4'],
+        labels: data[1],
         datasets: [{
           label: 'Label',
-          data: [0, 1, 2, 3, 4, 5],
+          data: timesSeries,
           borderwidth: 1
         }]
       },
