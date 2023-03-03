@@ -14,11 +14,28 @@
       {# Grid classes #}
     </div>
     
+
     <style>
-      table, th, td {
-         border: 1px solid;
-      }
+    /* CSS for graph table */
+    table {
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #ccc;
+    }
+
+    td, th {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
     </style>
+
+
     <table id="stats" class="statstable"> {# Trial table #}
       <tr>
         <th>Amount of guesses</th>
@@ -31,8 +48,10 @@
       </tr>
     </table>
 
+
+
     <div class="btn-wrap">
-        <form action="{{ link.url}}" class="concentration_form">
+      <form action="{{ link.url }}" class="concentration_form">
         {% if playAgain %}
           <input disabled data-game="#{{ uniqueID }}" type="button" class="btn-disabled reset button btn btn-blue igbgame__button _{{ uniqueID }}_replay mt-3" value="{{ playAgain }}" />
         {% endif %}
@@ -53,5 +72,4 @@
     root.style.setProperty('--hint-color', "{{hintColor}}");
     root.style.setProperty('--hint-clarity', "{{hintClarity}}");
   </script>
-
 </div>

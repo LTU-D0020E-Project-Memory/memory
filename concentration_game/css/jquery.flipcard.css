@@ -152,7 +152,17 @@
 
 .statstable {
     position: relative;
-    left: 37%;
+    border: 5px solid rgb(0, 179, 224);
+    padding: 3px;
+}
+
+th {
+    font-size: 19px;
+}
+
+td {
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .hint {
