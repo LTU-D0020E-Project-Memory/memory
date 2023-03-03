@@ -10,6 +10,7 @@
       guesses: 0,
       startTime: 0,
       stopTime: 0,
+      hintStat: 0,
       init( el, options ) {
         const shuffledCards = this.shuffle( options.cards );
         const slicedCards = shuffledCards.slice( 0, options.limit );
@@ -70,6 +71,7 @@
                 return $(this).attr("data-id") === _.getData( $card, "guess"); //Scan through all cards until true match is found
               });
 
+              _.hintStat++;
               $hintCard.addClass("hint");
             }
           } 
@@ -108,7 +110,8 @@
         }
       },
       
-      win( _, $card ) {
+      win(_, $card ) {
+        alert("Win")
         const overlay = $card.closest( ".flipcard" ).find( ".modal-overlay" );
         const modal = $card.closest( ".flipcard" ).find( ".modal" );
         const blockId = $card.closest( ".flipcard" ).data( "options" ).id;
@@ -119,9 +122,17 @@
         _.setData( $card, "paused", true );
         document.getElementById("guesses").innerHTML = _.guesses;
         document.getElementById("time").innerHTML = _.stopTime;
-       // modal.removeClass('hidden').show();
         var stats = document.getElementById("stats");
         stats.style.visibility = "visible"
+
+        // Start save sats
+        if (localStorage.getItem('game_stats') === null) {
+          localStorage.setItem('game_stats', '');  
+        }
+
+        let game_stats = localStorage.getItem('game_stats') + _.stopTime + "|" + _.guesses + "|" + _.hintStat + ";";
+        localStorage.setItem('game_stats', game_stats);
+        // End save stats
         _.guesses = 0;
         _.startTime = 0;
         setTimeout( () => {
@@ -168,7 +179,7 @@
         let overlay = "<div class=\"modal-overlay\">";
         overlay += "<div class=\"modal hidden\">";
 
-        // overlay += '<button class="reset">Play Again?</button>';
+        overlay += '<button class="reset">Play Again?</button>';
         overlay += "</div>";
         frag += overlay;
         return frag;
@@ -199,12 +210,12 @@
       cards: []
     }, params );
 
-    this.each( function() {
+    this.each(function() {
       const memory = Object.create( Memory );
       $( this ).addClass( "flipcard" )
         .data( "paused", false )
         .data( "guess", null )
-        .data( "options", params );
+        .data( "options", params);
       memory.init( $( this ), params );
     } );
 

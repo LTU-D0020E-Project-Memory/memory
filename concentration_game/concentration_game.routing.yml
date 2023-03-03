@@ -4,11 +4,3 @@ concentration_game.content:
     _title: 'Memory Game'
   requirements:
     _permission: 'access content'
-
-dn_statistics.add_statistic:
-  path: '/statistics/add'
-  defaults:
-    _title: 'Add Statistics'
-    _form: '\Drupal\dn_statistics\Form\StatsForm'
-  requirements:
-    _access: 'TRUE'
