@@ -111,7 +111,6 @@
       },
       
       win(_, $card ) {
-        alert("Win")
         const overlay = $card.closest( ".flipcard" ).find( ".modal-overlay" );
         const modal = $card.closest( ".flipcard" ).find( ".modal" );
         const blockId = $card.closest( ".flipcard" ).data( "options" ).id;
