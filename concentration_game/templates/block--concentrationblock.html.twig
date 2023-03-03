@@ -36,17 +36,6 @@
     </style>
 
 
-    <table id="stats" class="statstable"> {# Trial table #}
-      <tr>
-        <th>Amount of guesses</th>
-        <th>Time taken</th>
-      </tr>
-      <tr>
-      {# Data goes here #}
-        <td id="guesses">N/A</td>
-        <td id="time">N/A</td>
-      </tr>
-    </table>
 
 
 
@@ -72,4 +61,16 @@
     root.style.setProperty('--hint-color', "{{hintColor}}");
     root.style.setProperty('--hint-clarity', "{{hintClarity}}");
   </script>
+  <br>
+    <table id="stats" class="statstable"> {# Trial table #}
+      <tr>
+        <th>Time taken</th>
+        <th>Amount of guesses</th>
+        <th>Amount of hints</th>
+      </tr>
+      <tr>
+      {# Data goes here #}
+      </tr>
+    </table>
+
 </div>
