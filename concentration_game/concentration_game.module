@@ -153,8 +153,6 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
   else {
     $hintColor = "darkgreen";
   }
-  $hintColor = "darkgreen";
-  $hintClarity = "0px";
   if (!empty($content->get('field_concentration_play_again')->getValue())) {
     $playAgain = $content->get('field_concentration_play_again')->getValue()[0]['value'];
   }
