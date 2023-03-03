@@ -132,6 +132,7 @@
         let game_stats = localStorage.getItem('game_stats') + _.stopTime + "|" + _.guesses + "|" + _.hintStat + ";";
         localStorage.setItem('game_stats', game_stats);
         // End save stats
+        
         _.guesses = 0;
         _.startTime = 0;
         setTimeout( () => {

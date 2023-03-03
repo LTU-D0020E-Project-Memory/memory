@@ -34,8 +34,12 @@
         background-color: #f2f2f2;
     }
     </style>
-
-
+    <div>
+      <canvas id="chartTime"></canvas>
+    </div>
+    <div>
+      <canvas id="chartComb"></canvas>
+    </div>
     <table id="stats" class="statstable"> {# Trial table #}
       <tr>
         <th>Amount of guesses</th>
@@ -64,6 +68,7 @@
   {% else %}
     <p class="text-center">Insufficient cards to render concentration block, please add more cards.</p>
   {% endif %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     var cardAmount = "{{gridSetup}}";
     var hintLimit = "{{hintLimit}}";
@@ -71,5 +76,54 @@
     let root = document.documentElement;
     root.style.setProperty('--hint-color', "{{hintColor}}");
     root.style.setProperty('--hint-clarity', "{{hintClarity}}");
+  </script>
+  <script>
+    // const data = f();
+    const graphTime = document.getElementById('chartTime');
+    new Chart(graphTime, {
+      type: 'line',
+      data: {
+        labels: ['0', '1', '2', '3', '4'],
+        datasets: [{
+          label: 'Label',
+          data: [0, 1, 2, 3, 4, 5],
+          borderwidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    const graphComb = document.getElementById('chartComb');
+    new Chart(graphComb, {
+      type: 'line',
+      data: {
+        labels: ['0', '1', '2', '3', '4'],
+        datasets: [
+          {
+            label: 'Label',
+            data: [0, 1, 2, 3, 4, 5],
+            borderwidth: 1
+          },
+          {
+            label: 'Label 2',
+            data: [0, 1, 2],
+            borderwidth: 2
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   </script>
 </div>
