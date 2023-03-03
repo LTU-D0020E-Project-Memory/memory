@@ -3,9 +3,11 @@ langcode: en
 status: true
 dependencies:
   enforced:
+    module:
+      - concentration_game
+      - options
   module:
-    - concentration_game
-    - options
+    - block_content
 id: block_content.field_board_dimension
 field_name: field_board_dimension
 entity_type: block_content
