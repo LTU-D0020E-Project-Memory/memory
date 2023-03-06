@@ -125,7 +125,7 @@
          localStorage.setItem('game_stats', '');  
         }
         
-        let game_stats = localStorage.getItem('game_stats') + _.stopTime + "|" + _.guesses + "|" + _.hintStat + ";";
+        let game_stats = localStorage.getItem('game_stats') + _.stopTime + "|" + _.guesses + "|" + _.hintStat + "|" + cardAmount + ";";
         localStorage.setItem('game_stats', game_stats);
         // End save stats
 
@@ -185,15 +185,15 @@
     };
     
     switch (cardAmount) {
-      case "twobytwo":
+      case "2x2":
         t = 2;
         break;
     
-      case "threebytwo":
+      case "3x2":
         t = 3;
         break;
 
-      case "fourbyfour":
+      case "4x4":
         t = 8;
         break;
 

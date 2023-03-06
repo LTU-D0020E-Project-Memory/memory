@@ -13,27 +13,6 @@
     <div id="{{ uniqueID }}" class="game mt-3 {{ gridSetup }}">
       {# Grid classes #}
     </div>
-    
-
-    <style>
-    /* CSS for graph table */
-    table {
-        border-collapse: collapse;
-    }
-
-    th {
-        background-color: #ccc;
-    }
-
-    td, th {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-    </style>
 
     <div class="btn-wrap">
       <form action="{{ link.url }}" class="concentration_form">
@@ -50,11 +29,12 @@
     <p class="text-center">Insufficient cards to render concentration block, please add more cards.</p>
   {% endif %}
   <br>
-  <table id="stats" class="statstable">
+  <table id="statsTable">
     <tr>
       <th>Time taken</th>
       <th>Amount of guesses</th>
       <th>Amount of hints</th>
+      <th>Board size</th>
     </tr>
     <tr>
       {# Data goes here #}
@@ -70,8 +50,17 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    var cardAmount = "{{gridSetup}}";
-    var hintLimit = "{{hintLimit}}";
+    let hintLimit = "{{hintLimit}}";
+    switch ('{{ gridSetup }}') {
+      case 'fourbyfour':
+        var cardAmount = "4x4";
+        break;
+      case 'twobytwo':
+        var cardAmount = "2x2";
+        break;
+      default:
+        var cardAmount = "3x2";
+    }
 
     let root = document.documentElement;
     root.style.setProperty('--hint-color', "{{hintColor}}");
@@ -96,10 +85,10 @@
     }
 
     function populateTable(inArray) {
-      var table = document.getElementById("stats");
+      var table = document.getElementById("statsTable");
       for(let i = 0; i < (inArray.length); i++) {
         var row = table.insertRow();
-        for(let z = 0; z < 3; z++) {
+        for(let z = 0; z < 4; z++) {
           var td = row.insertCell();
           td.textContent = inArray[i][z];
         }
