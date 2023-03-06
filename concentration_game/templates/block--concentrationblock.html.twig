@@ -29,25 +29,26 @@
     <p class="text-center">Insufficient cards to render concentration block, please add more cards.</p>
   {% endif %}
   <br>
-  <table id="statsTable">
-    <tr>
-      <th>Time taken</th>
-      <th>Amount of guesses</th>
-      <th>Amount of hints</th>
-      <th>Board size</th>
-    </tr>
-    <tr>
-      {# Data goes here #}
-    </tr>
-  </table>
+  <div id="stats">
+    <table id="statsTable">
+      <tr>
+        <th>Time taken</th>
+        <th>Amount of guesses</th>
+        <th>Amount of hints</th>
+        <th>Board size</th>
+      </tr>
+      <tr>
+        {# Data goes here #}
+      </tr>
+    </table>
 
-  <div>
-    <canvas id="chartTime"></canvas>
+    <div>
+      <canvas id="chartTime"></canvas>
+    </div>
+    <div>
+      <canvas id="chartComb"></canvas>
+    </div>
   </div>
-  <div>
-    <canvas id="chartComb"></canvas>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     let hintLimit = "{{hintLimit}}";
@@ -95,6 +96,7 @@
       }
     }
 
+  function drawStats() {
     const data = prepareArray();
     populateTable(data[0]);
     const timesSeries = []
@@ -148,5 +150,6 @@
         }
       }
     });
+  }
   </script>
 </div>

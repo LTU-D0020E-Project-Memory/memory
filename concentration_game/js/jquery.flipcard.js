@@ -30,7 +30,7 @@
       setup( el ) {
         el.html( this.buildHTML() );
         var stats = document.getElementById("stats");
-        // stats.style.visibility = "hidden";
+        stats.style.display = "none";
       },
 
       binding( el ) {
@@ -129,8 +129,9 @@
         localStorage.setItem('game_stats', game_stats);
         // End save stats
 
+        drawStats();
         var stats = document.getElementById("stats");
-        stats.style.visibility = "visible"
+        stats.style.display = "block";
         _.guesses = 0;
         _.startTime = 0;
 
