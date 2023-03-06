@@ -102,9 +102,14 @@
     function drawStats() {
       const data = prepareArray();
       populateTable(data[0]);
-      const timesSeries = []
+
+      const timesSeries = [];
+      const guessSeries = [];
+      const hintsSeries = [];
       data[0].forEach((game) => {
         timesSeries.push(game[0]);
+        guessSeries.push(game[1]);
+        hintsSeries.push(game[2]);
       });
 
       try {
@@ -119,7 +124,7 @@
         data: {
           labels: data[1],
           datasets: [{
-            label: 'Label',
+            label: 'Completion time',
             data: timesSeries,
             borderwidth: 1
           }]
@@ -127,7 +132,18 @@
         options: {
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Time (s)'
+              }
+            },
+            x: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Game number'
+              }
             }
           }
         }
@@ -136,17 +152,17 @@
       graphComb = new Chart(canvasComb, {
         type: 'line',
         data: {
-          labels: ['0', '1', '2', '3', '4'],
+          labels: data[1],
           datasets: [
             {
-              label: 'Label',
-              data: [0, 1, 2, 3, 4, 5],
+              label: 'Number of tries',
+              data: guessSeries,
               borderwidth: 1
             },
             {
-              label: 'Label 2',
-              data: [0, 1, 2],
-              borderwidth: 2
+              label: 'Number of hints',
+              data: hintsSeries,
+              borderwidth: 1
             }
           ]
         },
@@ -154,6 +170,13 @@
           scales: {
             y: {
               beginAtZero: true
+            },
+            x: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Game number'
+              }
             }
           }
         }
