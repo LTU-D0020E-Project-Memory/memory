@@ -66,9 +66,12 @@
     let root = document.documentElement;
     root.style.setProperty('--hint-color', "{{hintColor}}");
     root.style.setProperty('--hint-clarity', "{{hintClarity}}");
-  </script>
 
-  <script>
+    var canvasTime = document.getElementById('chartTime');
+    var graphTime;
+    var canvasComb = document.getElementById('chartComb');
+    var graphComb;
+
     function prepareArray() {
       let arr = localStorage.getItem('game_stats');
       let superArray = arr.split(";");
@@ -96,60 +99,65 @@
       }
     }
 
-  function drawStats() {
-    const data = prepareArray();
-    populateTable(data[0]);
-    const timesSeries = []
-    data[0].forEach((game) => {
-      timesSeries.push(game[0]);
-    });
+    function drawStats() {
+      const data = prepareArray();
+      populateTable(data[0]);
+      const timesSeries = []
+      data[0].forEach((game) => {
+        timesSeries.push(game[0]);
+      });
 
-    const graphTime = document.getElementById('chartTime');
-    new Chart(graphTime, {
-      type: 'line',
-      data: {
-        labels: data[1],
-        datasets: [{
-          label: 'Label',
-          data: timesSeries,
-          borderwidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
+      try {
+        graphTime.destroy();
+        graphComb.destroy();
+      } 
+      
+      catch {}
 
-    const graphComb = document.getElementById('chartComb');
-    new Chart(graphComb, {
-      type: 'line',
-      data: {
-        labels: ['0', '1', '2', '3', '4'],
-        datasets: [
-          {
+      graphTime = new Chart(canvasTime, {
+        type: 'line',
+        data: {
+          labels: data[1],
+          datasets: [{
             label: 'Label',
-            data: [0, 1, 2, 3, 4, 5],
+            data: timesSeries,
             borderwidth: 1
-          },
-          {
-            label: 'Label 2',
-            data: [0, 1, 2],
-            borderwidth: 2
-          }
-        ]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
-  }
+      });
+
+      graphComb = new Chart(canvasComb, {
+        type: 'line',
+        data: {
+          labels: ['0', '1', '2', '3', '4'],
+          datasets: [
+            {
+              label: 'Label',
+              data: [0, 1, 2, 3, 4, 5],
+              borderwidth: 1
+            },
+            {
+              label: 'Label 2',
+              data: [0, 1, 2],
+              borderwidth: 2
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
   </script>
 </div>
