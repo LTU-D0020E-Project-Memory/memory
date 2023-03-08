@@ -51,7 +51,8 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    let hintLimit = "{{hintLimit}}";
+    var user_id = {{ user_id }};
+    let hintLimit = "{{ hintLimit }}";
     switch ('{{ gridSetup }}') {
       case 'fourbyfour':
         var cardAmount = "4x4";
@@ -75,24 +76,29 @@
     function prepareArray() {
       let arr = localStorage.getItem('game_stats');
       let superArray = arr.split(";");
-      superArray.pop();
+      superArray.pop(); // Get rid of last empty space
 
       let i = 0;
       let labels = [];
+      arr = []
       while (i < superArray.length) {
         superArray[i] = superArray[i].split("|");
-        labels.push(String(i));
+        if (superArray[i][0] == user_id) {
+          arr.push(superArray[i]);
+          labels.push(String(i));
+        }
+
         i++;
       }
       
-      return [superArray, labels];
+      return [arr, labels];
     }
 
     function populateTable(inArray) {
       var table = document.getElementById("statsTable");
       for(let i = 0; i < (inArray.length); i++) {
         var row = table.insertRow();
-        for(let z = 0; z < 4; z++) {
+        for(let z = 1; z < 5; z++) {
           var td = row.insertCell();
           td.textContent = inArray[i][z];
         }
@@ -107,9 +113,9 @@
       const guessSeries = [];
       const hintsSeries = [];
       data[0].forEach((game) => {
-        timesSeries.push(game[0]);
-        guessSeries.push(game[1]);
-        hintsSeries.push(game[2]);
+        timesSeries.push(game[1]);
+        guessSeries.push(game[2]);
+        hintsSeries.push(game[3]);
       });
 
       try {
@@ -160,7 +166,7 @@
               borderwidth: 1
             },
             {
-              label: 'Number of hints',
+              label: 'Number of hints recieved',
               data: hintsSeries,
               borderwidth: 1
             }

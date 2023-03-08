@@ -120,12 +120,12 @@
         _.stopTime = (Date.now() - _.startTime)/1000;
         _.setData( $card, "paused", true );
        
-       // Start save sats
-       if (localStorage.getItem('game_stats') === null) {
-         localStorage.setItem('game_stats', '');  
+        // Start save sats
+        if (localStorage.getItem('game_stats') === null) {
+          localStorage.setItem('game_stats', '');  
         }
         
-        let game_stats = localStorage.getItem('game_stats') + _.stopTime + "|" + _.guesses + "|" + _.hintStat + "|" + cardAmount + ";";
+        let game_stats = localStorage.getItem('game_stats') + user_id + "|" + _.stopTime + "|" + _.guesses + "|" + _.hintStat + "|" + cardAmount + ";";
         localStorage.setItem('game_stats', game_stats);
         // End save stats
 

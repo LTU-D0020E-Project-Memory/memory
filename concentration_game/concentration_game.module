@@ -186,6 +186,7 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
   $variables['hintLimit'] = $hints;
   $variables['hintClarity'] = $hintClarity;
   $variables['hintColor'] = $hintColor;
+  $variables['user_id'] = \Drupal::currentUser()->id();
 }
 
 /**
