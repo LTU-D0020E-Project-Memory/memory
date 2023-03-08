@@ -25,6 +25,7 @@ function concentration_game_theme() {
  * {@inheritdoc}
  */
 function concentration_game_block_view_alter(array &$build, BlockPluginInterface $block) {
+
   $content = $block->build()['#block_content'];
   if (!empty($content) && ($content->bundle() === "concentration")) {
     if (empty($content->get('field_concentration_face_down')->getValue())) {
@@ -55,6 +56,7 @@ function concentration_game_block_view_alter(array &$build, BlockPluginInterface
     }
     $cardAmount = 8;
     if (count($image_info) < $cardAmount) {
+
       $admin_user = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => 'admin']);
       $admin_user_id = !empty($admin_user) ? reset($admin_user)->id() : 0;
     while(count($image_info)< $cardAmount){
@@ -76,6 +78,7 @@ function concentration_game_block_view_alter(array &$build, BlockPluginInterface
     }
 
     }
+
     $uniqueid = $content->bundle().'_'.$content->id().'_'.rand();
     $build['#attached']['drupalSettings']['gameBoxes']['concentration'][$uniqueid] = [
       'cards' => $image_info,
@@ -229,3 +232,5 @@ function get_image_data_concentration_game($media_id, $image_style = '') {
 
   return $data;
 }
+
+
