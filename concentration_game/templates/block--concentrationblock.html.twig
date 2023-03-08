@@ -79,13 +79,15 @@
       superArray.pop(); // Get rid of last empty space
 
       let i = 0;
+      let j = 0;
       let labels = [];
       arr = []
       while (i < superArray.length) {
         superArray[i] = superArray[i].split("|");
         if (superArray[i][0] == user_id) {
           arr.push(superArray[i]);
-          labels.push(String(i));
+          labels.push(String(j));
+          j++;
         }
 
         i++;
