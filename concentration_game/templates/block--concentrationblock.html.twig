@@ -13,42 +13,6 @@
     <div id="{{ uniqueID }}" class="game mt-3 {{ gridSetup }}">
       {# Grid classes #}
     </div>
-    
-
-    <style>
-    /* CSS for graph table */
-    table {
-        border-collapse: collapse;
-    }
-
-    th {
-        background-color: #ccc;
-    }
-
-    td, th {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-    </style>
-
-
-    <table id="stats" class="statstable"> {# Trial table #}
-      <tr>
-        <th>Amount of guesses</th>
-        <th>Time taken</th>
-      </tr>
-      <tr>
-      {# Data goes here #}
-        <td id="guesses">N/A</td>
-        <td id="time">N/A</td>
-      </tr>
-    </table>
-
-
 
     <div class="btn-wrap">
       <form action="{{ link.url }}" class="concentration_form">
@@ -64,12 +28,159 @@
   {% else %}
     <p class="text-center">Insufficient cards to render concentration block, please add more cards.</p>
   {% endif %}
+  <br>
+  <div id="stats">
+    <table id="statsTable">
+      <tr>
+        <th>Time taken</th>
+        <th>Amount of guesses</th>
+        <th>Amount of hints</th>
+        <th>Board size</th>
+      </tr>
+      <tr>
+        {# Data goes here #}
+      </tr>
+    </table>
+
+    <div>
+      <canvas id="chartTime"></canvas>
+    </div>
+    <div>
+      <canvas id="chartComb"></canvas>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    var cardAmount = "{{gridSetup}}";
-    var hintLimit = "{{hintLimit}}";
+    let hintLimit = "{{hintLimit}}";
+    switch ('{{ gridSetup }}') {
+      case 'fourbyfour':
+        var cardAmount = "4x4";
+        break;
+      case 'twobytwo':
+        var cardAmount = "2x2";
+        break;
+      default:
+        var cardAmount = "3x2";
+    }
 
     let root = document.documentElement;
     root.style.setProperty('--hint-color', "{{hintColor}}");
     root.style.setProperty('--hint-clarity', "{{hintClarity}}");
+
+    var canvasTime = document.getElementById('chartTime');
+    var graphTime;
+    var canvasComb = document.getElementById('chartComb');
+    var graphComb;
+
+    function prepareArray() {
+      let arr = localStorage.getItem('game_stats');
+      let superArray = arr.split(";");
+      superArray.pop();
+
+      let i = 0;
+      let labels = [];
+      while (i < superArray.length) {
+        superArray[i] = superArray[i].split("|");
+        labels.push(String(i));
+        i++;
+      }
+      
+      return [superArray, labels];
+    }
+
+    function populateTable(inArray) {
+      var table = document.getElementById("statsTable");
+      for(let i = 0; i < (inArray.length); i++) {
+        var row = table.insertRow();
+        for(let z = 0; z < 4; z++) {
+          var td = row.insertCell();
+          td.textContent = inArray[i][z];
+        }
+      }
+    }
+
+    function drawStats() {
+      const data = prepareArray();
+      populateTable(data[0]);
+
+      const timesSeries = [];
+      const guessSeries = [];
+      const hintsSeries = [];
+      data[0].forEach((game) => {
+        timesSeries.push(game[0]);
+        guessSeries.push(game[1]);
+        hintsSeries.push(game[2]);
+      });
+
+      try {
+        graphTime.destroy();
+        graphComb.destroy();
+      } 
+      
+      catch {}
+
+      graphTime = new Chart(canvasTime, {
+        type: 'line',
+        data: {
+          labels: data[1],
+          datasets: [{
+            label: 'Completion time',
+            data: timesSeries,
+            borderwidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Time (s)'
+              }
+            },
+            x: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Game number'
+              }
+            }
+          }
+        }
+      });
+
+      graphComb = new Chart(canvasComb, {
+        type: 'line',
+        data: {
+          labels: data[1],
+          datasets: [
+            {
+              label: 'Number of tries',
+              data: guessSeries,
+              borderwidth: 1
+            },
+            {
+              label: 'Number of hints',
+              data: hintsSeries,
+              borderwidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            },
+            x: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Game number'
+              }
+            }
+          }
+        }
+      });
+    }
   </script>
 </div>

@@ -141,21 +141,22 @@ function concentration_game_preprocess_block__concentrationblock(&$variables) {
     $hints = 0;
   }
   
- if (!empty($content->get('field_hint_clarity')->getValue())) {
+  if (!empty($content->get('field_hint_clarity')->getValue())) {
     $hintClarity = strval($content->get('field_hint_clarity')->getValue()[0]['value']);
   }
   
- else {
+  else {
     $hintClarity = "0px";
   }
   
- if (!empty($content->get('field_hint_color')->getValue())) {
+  if (!empty($content->get('field_hint_color')->getValue())) {
     $hintColor = strval($content->get('field_hint_color')->getValue()[0]['value']);
   }
   
   else {
     $hintColor = "darkgreen";
   }
+  
   if (!empty($content->get('field_concentration_play_again')->getValue())) {
     $playAgain = $content->get('field_concentration_play_again')->getValue()[0]['value'];
   }

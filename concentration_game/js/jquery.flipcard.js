@@ -30,7 +30,7 @@
       setup( el ) {
         el.html( this.buildHTML() );
         var stats = document.getElementById("stats");
-        stats.style.visibility = "hidden";
+        stats.style.display = "none";
       },
 
       binding( el ) {
@@ -119,21 +119,22 @@
         overlay.show();
         _.stopTime = (Date.now() - _.startTime)/1000;
         _.setData( $card, "paused", true );
-        document.getElementById("guesses").innerHTML = _.guesses;
-        document.getElementById("time").innerHTML = _.stopTime;
-        var stats = document.getElementById("stats");
-        stats.style.visibility = "visible"
-
-        // Start save sats
-        if (localStorage.getItem('game_stats') === null) {
-          localStorage.setItem('game_stats', '');  
+       
+       // Start save sats
+       if (localStorage.getItem('game_stats') === null) {
+         localStorage.setItem('game_stats', '');  
         }
-
-        let game_stats = localStorage.getItem('game_stats') + _.stopTime + "|" + _.guesses + "|" + _.hintStat + ";";
+        
+        let game_stats = localStorage.getItem('game_stats') + _.stopTime + "|" + _.guesses + "|" + _.hintStat + "|" + cardAmount + ";";
         localStorage.setItem('game_stats', game_stats);
         // End save stats
+
+        drawStats();
+        var stats = document.getElementById("stats");
+        stats.style.display = "block";
         _.guesses = 0;
         _.startTime = 0;
+
         setTimeout( () => {
         $( `[data-game="#${blockId}"]` ).prop( "disabled", false ).removeClass("btn-disabled");
         $( `._${blockId}_button` ).prop( "disabled", false ).removeClass( "btn-disabled" );
@@ -177,7 +178,6 @@
 
         let overlay = "<div class=\"modal-overlay\">";
         overlay += "<div class=\"modal hidden\">";
-
         overlay += '<button class="reset">Play Again?</button>';
         overlay += "</div>";
         frag += overlay;
@@ -186,15 +186,15 @@
     };
     
     switch (cardAmount) {
-      case "twobytwo":
+      case "2x2":
         t = 2;
         break;
     
-      case "threebytwo":
+      case "3x2":
         t = 3;
         break;
 
-      case "fourbyfour":
+      case "4x4":
         t = 8;
         break;
 
