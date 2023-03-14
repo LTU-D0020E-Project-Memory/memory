@@ -12,7 +12,7 @@ Denna modul består av ett "Custom Block" som låter användare spela spelet "Me
 
 ## Externa moduler
 
-Denna modul kräver inga externa moduler utanför Drupals "Core"
+Denna modul kräver inga externa moduler utanför Drupals "Core"-moduler.
 För att stödja användning av URL-bilder krävs dock en installering av följande modul: https://www.drupal.org/project/media_entity_remote_image
 
 ## Installation
