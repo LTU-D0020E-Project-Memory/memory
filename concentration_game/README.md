@@ -4,7 +4,7 @@
  * Externa Moduler
  * Installation
  * Konfiguration
-
+ * Bra att veta
 
 ## Introduktion
 
@@ -106,3 +106,7 @@ Förutsättningar: “Stöd för URL-bilder”-guide genomförd
 7. För att generera thumbnail för URL-bilden navigerar du till “Manage->Configuration->Media->Media entity remote image settings”, markerar “Generate Thumbnail            Previews” och klickar på “Save configuration”.
 8. Klar, nu kan URL-bilderna som lagts till i Media Library användas för Memoryts “Game images” och “Face down image”.
 
+## Bra att veta
+
+Vid avinstallation av Memory-modulen, kontrollera att samtliga fält tas bort i samband med avinstallationen. Om alla fält inte tas bort under avinstallationen riskerar de att vara kvar på webbsidans "field list" utan möjlighet till manuell borttagning. Detta kan leda till att ni måste ominstallera hela er Drupal Site, så kontrollera fältlistan som ges vid varje avinstallation. Vid skapande av egenutvecklade fält, se till att ange "concentration_game" som en "enforced dependency" i fältets storage-fil, borde vara namngiven på följande sätt: field.storage.block_content."field_name".yml 
+För att hitta exempel på detta, se koden i .yml-filerna för "hints","board_dimension","hint_clarity" samt "hint_color"
