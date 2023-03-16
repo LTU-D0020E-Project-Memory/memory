@@ -110,3 +110,7 @@ Förutsättningar: “Stöd för URL-bilder”-guide genomförd
 
 Vid avinstallation av Memory-modulen, kontrollera att samtliga fält tas bort i samband med avinstallationen. Om alla fält inte tas bort under avinstallationen riskerar de att vara kvar på webbsidans "field list" utan möjlighet till manuell borttagning. Detta kan leda till att ni måste ominstallera hela er Drupal Site, så kontrollera fältlistan som ges vid varje avinstallation. Vid skapande av egenutvecklade fält, se till att ange "concentration_game" som en "enforced dependency" i fältets storage-fil, borde vara namngiven på följande sätt: field.storage.block_content."field_name".yml 
 För att hitta exempel på detta, se koden i .yml-filerna för "hints","board_dimension","hint_clarity" samt "hint_color"
+
+För övrigt är "Concentration game" och "Memory" två begrepp för samma sak, spelet som vanligtvis benämns "Memory".
+https://en.wikipedia.org/wiki/Concentration_(card_game)
+
