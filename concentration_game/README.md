@@ -1,86 +1,115 @@
-## Contents of this file
+## Innehåll
 
- * Introduction
- * Recommended modules
+ * Introduktion
+ * Externa Moduler
  * Installation
- * Configuration
+ * Konfiguration
+ * Bra att veta
 
+## Introduktion
 
-## Introduction
+Denna modul består av ett "Custom Block" som låter användare spela spelet "Memory"
 
-**The Concentration Game** lets you put up a custom block to let users
-play the game [Concentration][WP] on your website.
+## Externa moduler
 
-* For a full description of the module, visit the [project page][PP].
-
-* To submit bug reports and feature suggestions, or to track changes
-  visit the project's [issue tracker][IT].
-
-## Requirements
-
-This module requires no modules outside of Drupal core.
-
+Denna modul kräver inga externa moduler utanför Drupals "Core"-moduler.
+För att stödja användning av URL-bilder krävs dock en installering av följande modul: https://www.drupal.org/project/media_entity_remote_image
 
 ## Installation
 
-1. Install as you would normally install a contributed Drupal
-   module. Visit [Installing modules][IM] for further information.
+Guide för modulinstallation i Drupal Site:
+Förutsättningar: Modulmappen måste existera lokalt på din dator i .ZIP eller .RAR-format
+1. Logga in på adminkontot för din Drupal Site
+2. Navigera till “Manage”-menyn
+3. Välj “Extend”-fliken
+4. Klicka på knappen “Add new module”
+5. Lägg till modulmappen genom att klicka “Välj fil” och ange modulmappen från den lokala filstrukturen
+6. Klicka “Continue”
+7. Under “Next Steps”, klicka “Enable newly added modules”
+8. I sökfältet, sök på “Concentration game”
+9. Markera rutan för “Concentration game” 
+10. Klicka “Install” längst ner på sidan
+11. Klar med installation
 
-2. Enable module by locating it on the list under the Extend
-   tab in the administrative GUI.
+Guide för avinstallation av modul i Drupal Site:
+1. Logga in på adminkontot för din Drupal Site
+2. Navigera till “Manage”-menyn
+3. Välj “Extend”-fliken
+4. På Extend-sidan, välj fliken “Uninstall”
+5. I sökrutan, ange “Concentration game”
+6. Klicka “Uninstall”
+7. Klicka “Uninstall” längst ner på sidan
+8. Klar med avinstallation
+
+## Konfiguration
+
+#Grundkonfiguration för Memory-modul i Drupal Site
+Dessa instruktioner är ämnade till att skapa ett content block för att själva memoryt ska kunna synas på en eller flera Drupalsidor.
+
+Förutsättningar:Inloggad på adminsidan och installerad Memory-modul
+ 
+1. I Manage-menyn, klicka “Structure”
+
+2. Klicka “Block Layout”
+
+3. Klicka “Custom block library
+
+4. Klicka “Concentration”
+
+5. Fyll i de fält som är markerade med en röd stjärna(obligatoriska) samt “Hints” och “Play Again” med passande värden. 
+   Vad som är passande värden ska kunna avgöras genom att läsa fältbeskrivningarna.
+
+6. Klicka “Save” längst ner på sidan
+
+7. Navigera till “Block layout”
+
+8. Välj passande block att lägga ut Memoryt på, förslagsvis “Content”
+
+9. Klicka “Place block” på önskat val
+
+9. I sökrutan, ange Memory-blockets “Block Description” som angavs i punkt 5.
+
+10. Klicka “Place block” när korrekt block lokaliserats
+
+11. I denna meny kan man ange för vilka användarroller, sidotyper eller specifika drupalsidor som Memoryt ska vara synligt på. Om inga speciella önskemål om dessa         saker finns så kan de lämnas tomma. 
+
+12. Klicka “Save block”
+
+13. Memory ska nu vara synligt på angivna sidor för angivna användare
 
 
-## Configuration
 
-The game will not appear until you've configured a custom block for
-the game board, and added images for the cards. You also need to place
-place the block on a page for the game to appear.
+#Guide för att lägga till stöd för URL-bilder: 
+1. Följ stegen för modulinstallation, men med följande modul:
+https://www.drupal.org/project/media_entity_remote_image
 
-First, navigate to **Manage » Structure » Block layout** and select
-the tab "Custom block library" and then press "Add custom
-block". Select the block named "Concentration".
+2. I Manage-menyn, välj “Reports”
+3. I “Reports”, välj “field list”
+4. I “field list”, välj “Concentration” under valfritt fält i “Used In” kolumnen
+5. Välj fältet med label “Game Images” och klicka på knappen “Edit” längst till höger
+6. I fältet “Reference type”, under rubriken “Media type”, markera rutan “Remote image”
+7. Scrolla längst ner och klicka på knappen “Save Settings”
 
-In order to add be able to add the block to you site, you need to
-configure all the required fields.
-
-In the field "Block description, enter "Concentration game block".
-
-The field "Game images" *must* hold all the the eigth images that
-players will need to remember when they play the game. You add each
-image by pressing "Add media". You can add images that already exist
-in your media library, or browse your computer for new images to add.
-
-In the field "Continue link" you can either type the title of another
-node on your website (it will autocomplete if it exists), or an
-internal path. In "Link text", type the test to show on the button for
-the link.
-
-When done configuring the block, scroll down to the bottom of the page
-and press "Save"
-
-After changing the configuration, you need to rebuild the cache for
-changes to have any effect.
-
-Now, you need to pick a region the region where this block should be
-displayed.  Navigate to **Manage » Structure » Block layout** and pick
-a region. If you just want to try out the game, the simplest is to
-pick the main content region. It will probably be named something like
-"Content" or "Main content" (the exact name is determined by the
-theme).
-
-Click "Place" block for the region. You should see a list of blocks.
-If you entered "Concentration game block" in the field for the block
-description, locate that, and click "Place block" to the right of it.
-
-Now, visit any page on your website, and you should see the custom
-block with the game it and be able to play.
-
-To restrict the game to a single page, create a Basic page to hold the
-custom game block and change the configuration for the block to
-restrict it to the Basic page you created to hold the block.
+Notera: För att lägga till URL-bilder till Memory-modulen måste de först läggas till i “Media Library”
 
 
-[WP]: https://en.wikipedia.org/wiki/Concentration_(card_game)
-[PP]: https://drupal.org/project/concentration_game
-[IT]: https://drupal.org/project/issues/concentration_game
-[IM]: https://www.drupal.org/node/1897420
+
+#Guide för att lägga till URL-bilder:
+Förutsättningar: “Stöd för URL-bilder”-guide genomförd
+
+1. I Manage-menyn, klicka “Content”
+2. Välj fliken “Media”, klicka “Add media”
+3. Klicka “Remote image”
+4. Fyll i relevanta textfält
+5. Klicka “Save” längst ner på sidan
+6. Bilden är nu tillagd i Media Library för din Drupal Site. 
+7. För att generera thumbnail för URL-bilden navigerar du till “Manage->Configuration->Media->Media entity remote image settings”, markerar “Generate Thumbnail            Previews” och klickar på “Save configuration”.
+8. Klar, nu kan URL-bilderna som lagts till i Media Library användas för Memoryts “Game images” och “Face down image”.
+
+## Bra att veta
+
+Vid avinstallation av Memory-modulen, kontrollera att samtliga fält tas bort i samband med avinstallationen. Om alla fält inte tas bort under avinstallationen riskerar de att vara kvar på webbsidans "field list" utan möjlighet till manuell borttagning. Detta kan leda till att ni måste ominstallera hela er Drupal Site, så kontrollera fältlistan som ges vid varje avinstallation. Vid skapande av egenutvecklade fält, se till att ange "concentration_game" som en "enforced dependency" i fältets storage-fil, borde vara namngiven på följande sätt: field.storage.block_content."field_name".yml 
+För att hitta exempel på detta, se koden i .yml-filerna för "hints","board_dimension","hint_clarity" samt "hint_color"
+
+För övrigt är "Concentration game" och "Memory" två begrepp för samma sak, spelet som vanligtvis benämns "Memory".
+https://en.wikipedia.org/wiki/Concentration_(card_game)
