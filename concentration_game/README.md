@@ -113,3 +113,4 @@ För att hitta exempel på detta, se koden i .yml-filerna för "hints","board_di
 
 För övrigt är "Concentration game" och "Memory" två begrepp för samma sak, spelet som vanligtvis benämns "Memory".
 https://en.wikipedia.org/wiki/Concentration_(card_game)
+
