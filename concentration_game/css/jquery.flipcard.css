@@ -197,10 +197,12 @@ tr:nth-child(even) {
         gap: 2vh 2vh;
     }
     
+    /* First column content alignment */
     .twobytwo .card:nth-child(2n + 0) {
         justify-self: start;
     }
 
+    /* Last column content alignment */
     .twobytwo .card:nth-child(2n + 1) {
         justify-self: end;
     }

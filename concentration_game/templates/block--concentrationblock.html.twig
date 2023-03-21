@@ -41,7 +41,6 @@
         {# Data goes here #}
       </tr>
     </table>
-
     <div>
       <canvas id="chartTime"></canvas>
     </div>
@@ -51,8 +50,9 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    {# Retrieve data from the .module file #}
     var user_id = {{ user_id }};
-    let hintLimit = "{{ hintLimit }}";
+    let hintLimit = "{{ hintLimit }}"; // The amount of guesses before a hint
     switch ('{{ gridSetup }}') {
       case 'fourbyfour':
         var cardAmount = "4x4";
@@ -65,6 +65,7 @@
     }
 
     let root = document.documentElement;
+    // Setup CSS variables for hints
     root.style.setProperty('--hint-color', "{{hintColor}}");
     root.style.setProperty('--hint-clarity', "{{hintClarity}}");
 
@@ -73,6 +74,11 @@
     var canvasComb = document.getElementById('chartComb');
     var graphComb;
 
+    {# 
+      Fetches stat data from localStorage.
+      Returns an array where index 0 holds the data and
+      index 1 holds labels for the data.
+    #}
     function prepareArray() {
       let arr = localStorage.getItem('game_stats');
       let superArray = arr.split(";");
@@ -96,6 +102,7 @@
       return [arr, labels];
     }
 
+    {# Fills the stats table with data#}
     function populateTable(inArray) {
       var table = document.getElementById("statsTable");
       for(let i = 0; i < (inArray.length); i++) {
@@ -107,10 +114,13 @@
       }
     }
 
+    {# Main function for stats, renders stats table and graphs #}
     function drawStats() {
+      // data holds stats data & labels
       const data = prepareArray();
       populateTable(data[0]);
 
+      // Retrieve data for graphs
       const timesSeries = [];
       const guessSeries = [];
       const hintsSeries = [];
@@ -120,6 +130,8 @@
         hintsSeries.push(game[3]);
       });
 
+      // If graphs have already been created once 
+      // they need to be destroyed before being re-drawn
       try {
         graphTime.destroy();
         graphComb.destroy();
@@ -127,6 +139,7 @@
       
       catch {}
 
+      // Charts from the chart.js library
       graphTime = new Chart(canvasTime, {
         type: 'line',
         data: {
